@@ -1,4 +1,4 @@
-package com.ualr.idlegame.fragments;
+package com.ualr.idlegame.fragments.tabs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
 
-public class UpgradesTabFragment extends Fragment {
+public class ArmyTabFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
+        return inflater.inflate(R.layout.tab_army_fragment, container, false);
     }
 }

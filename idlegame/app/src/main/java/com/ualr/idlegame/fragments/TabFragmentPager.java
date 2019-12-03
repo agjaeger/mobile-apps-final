@@ -4,6 +4,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.ualr.idlegame.fragments.tabs.ArmyTabFragment;
+import com.ualr.idlegame.fragments.tabs.MapTabFragment;
+import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
+import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
+
 public class TabFragmentPager extends FragmentStatePagerAdapter {
 
     int tabCount;

@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
 
-public class MapTabFragment extends Fragment {
+public class ActionRowFragment extends Fragment {
+
+    public ActionRowFragment (String text) {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_map_fragment, container, false);
+        return inflater.inflate(R.layout.actionrow_fragment, container, false);
     }
 }
