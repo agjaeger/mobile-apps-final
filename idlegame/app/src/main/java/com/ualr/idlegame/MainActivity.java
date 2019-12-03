@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
+import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
 import com.snappydb.DB;
@@ -27,6 +28,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         // launch background thread to calculate ticks
         bgTickThread.onTickListener = this;
         bgTickThread.execute();
+
+        // open the database for the application
+        try {
+            DatabaseManager.getInstance().open(getApplicationContext());
+        } catch (SnappydbException sde) {
+            System.out.println("Unable to open the database!");
+            System.exit(1);
+        }
 
         // find tablayout view and populate with Tabs
         tabLayout = findViewById(R.id.tablayout_parent);
@@ -52,24 +61,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             }
         });
 
-        try {
-            DB snappydb = DBFactory.open(getApplicationContext());
-
-            if (snappydb.exists("myint")) {
-                int myint = snappydb.getInt("myint");
-
-                snappydb.putInt("myint", myint + 1);
-            } else {
-                snappydb.putInt("myint", 0);
-            }
-
-            System.out.println(snappydb.getInt("myint"));
-
-            snappydb.close();
-        } catch (SnappydbException sde) {
-            System.out.println("SNAPPY EXCEPTION");
-            System.out.println(sde);
-        }*/
     }
 
     @Override
