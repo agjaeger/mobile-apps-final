@@ -28,6 +28,8 @@ public class RecruitTabFragment extends Fragment {
         return view;
     }
 
+
+
     public class RecruitTabFragmentViewHolder {
         private LinearLayout linearLayout;
 
@@ -43,5 +45,6 @@ public class RecruitTabFragment extends Fragment {
 
             ft.commit();
         }
+
     }
 }
