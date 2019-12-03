@@ -1,4 +1,4 @@
-package com.example.idlegame;
+package com.ualr.idlegame;
 
 import android.content.Context;
 

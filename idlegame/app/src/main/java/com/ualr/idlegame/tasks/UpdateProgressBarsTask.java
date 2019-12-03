@@ -1,11 +1,15 @@
-package com.example.idlegame.tasks;
+package com.ualr.idlegame.tasks;
 
 import android.os.AsyncTask;
 import android.view.View;
 
-import com.example.idlegame.R;
-
 public class UpdateProgressBarsTask extends AsyncTask<Void, View, Void> {
+
+    public UpdateProgressBarsTask.OnTickInterface onTickListener;
+    public interface OnTickInterface {
+        void onTick ();
+    }
+
     protected Void doInBackground(Void... params) {
         try {
             while (true) {
@@ -19,6 +23,6 @@ public class UpdateProgressBarsTask extends AsyncTask<Void, View, Void> {
     }
 
     protected void onProgressUpdate(View... progress) {
-        System.out.println("Tick");
+        onTickListener.onTick();
     }
 }

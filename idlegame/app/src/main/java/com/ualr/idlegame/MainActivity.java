@@ -1,22 +1,32 @@
-package com.example.idlegame;
+package com.ualr.idlegame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.idlegame.tasks.UpdateProgressBarsTask;
+import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private UpdateProgressBarsTask bgTickThread = new UpdateProgressBarsTask();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bgTickThread.onTickListener = new UpdateProgressBarsTask.OnTickInterface() {
+            @Override
+            public void onTick() {
+                System.out.println("TETS");
+            }
+        };
+
+        bgTickThread.execute(); // launch background thread to calculate ticks
 
         View progressbar = findViewById(R.id.id_progressbar_2);
         progressbar.setOnClickListener(new View.OnClickListener() {
@@ -25,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Hello World");
             }
         });
-
-        // new UpdateProgressBarsTask().execute();
 
 
         try {
@@ -46,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (SnappydbException sde) {
             System.out.println("SNAPPY EXCEPTION");
             System.out.println(sde);
-        };
-
+        }
     }
 }
