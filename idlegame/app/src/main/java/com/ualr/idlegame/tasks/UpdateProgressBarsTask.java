@@ -5,8 +5,8 @@ import android.view.View;
 
 public class UpdateProgressBarsTask extends AsyncTask<Void, View, Void> {
 
-    public UpdateProgressBarsTask.OnTickInterface onTickListener;
-    public interface OnTickInterface {
+    public UpdateProgressBarsTask.OnTickListener onTickListener;
+    public interface OnTickListener {
         void onTick ();
     }
 

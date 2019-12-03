@@ -18,158 +18,27 @@
         android:id="@+id/tablayout_parent"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager"
+        app:layout_constraintStart_toEndOf="@+id/resourcespane"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="center">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_recruit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recruit" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_army"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Army" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_upgrades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upgrades" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Map" />
-    </com.google.android.material.tabs.TabLayout>
+        app:tabGravity="center"/>
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/resourcespane"
         android:layout_width="216dp"
-        android:layout_height="469dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/space"
-        app:layout_constraintStart_toEndOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/tablayout_parent">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <ProgressBar
-                    android:id="@+id/id_progress_bar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:max="100"
-                    android:progress="50"
-                    android:scaleY="5"
-                    android:translationY="2dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <ProgressBar
-                    android:id="@+id/id_progressbar_2"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:max="100"
-                    android:progress="100"
-                    android:progressTint="#00A81818"
-                    android:scaleY="5"
-                    android:translationY="2dp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
+        app:layout_constraintStart_toEndOf="@+id/resourcespane"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_parent"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
