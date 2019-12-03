@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.TabFragmentPager;
+import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
 
 import com.snappydb.SnappydbException;
@@ -15,8 +16,10 @@ import com.snappydb.SnappydbException;
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, UpdateProgressBarsTask.OnTickListener {
 
     private UpdateProgressBarsTask bgTickThread = new UpdateProgressBarsTask();
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private TabFragmentPager tabFragmentPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +49,19 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         // find and setup viewpager
         viewPager = findViewById(R.id.viewPager);
-        TabFragmentPager adapter = new TabFragmentPager (getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+        tabFragmentPager = new TabFragmentPager (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(tabFragmentPager);
 
         tabLayout.addOnTabSelectedListener(this);
 
-        /*View progressbar = findViewById(R.id.id_progressbar_2);
-        progressbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            System.out.println("Hello World");
-            }
-        });*/
+        // set the first tab as active on startup
+        //tabFragmentPager.setActive(0);
+        //viewPager.setCurrentItem(0, true);
     }
 
     @Override
     public void onTabSelected (TabLayout.Tab tab) {
+       //tabFragmentPager.setActive(tab.getPosition());
        viewPager.setCurrentItem(tab.getPosition());
     }
 
@@ -77,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     public void onTick () {
-        System.out.println("Tick");
+        if (tabFragmentPager.getActive() instanceof RecruitTabFragment) {
+            RecruitTabFragment rtf = (RecruitTabFragment) tabFragmentPager.getActive();
+
+            if (rtf != null) {
+                rtf.incrementProgressBars();
+            }
+
+            System.out.println("TICK RTF");
+        }
     }
 }

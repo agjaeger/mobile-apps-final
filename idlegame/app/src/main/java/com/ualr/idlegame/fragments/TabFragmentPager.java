@@ -21,6 +21,11 @@ public class TabFragmentPager extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem (int position) {
+        setActive(position);
+        return active;
+    }
+
+    public void setActive (int position) {
         switch (position) {
             case 0:
                 active = new RecruitTabFragment();
@@ -37,9 +42,7 @@ public class TabFragmentPager extends FragmentStatePagerAdapter {
 
             default:
                 active =  null;
-        };
-
-        return active;
+        }
     }
 
     @Override

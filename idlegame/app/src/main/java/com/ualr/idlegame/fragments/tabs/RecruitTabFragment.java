@@ -17,18 +17,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecruitTabFragment extends Fragment {
-
-    RecruitTabFragmentViewHolder viewHolder;
+    RecruitTabFragmentViewHolder viewHolder = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
-        RecruitTabFragmentViewHolder viewHolder = new RecruitTabFragmentViewHolder(view);
+        viewHolder = new RecruitTabFragmentViewHolder(view);
 
         return view;
     }
 
-
+    public void incrementProgressBars () {
+        if (viewHolder != null) {
+            viewHolder.incrementProgressBars();
+        }
+    }
 
     public class RecruitTabFragmentViewHolder {
         private LinearLayout linearLayout;
@@ -40,11 +43,20 @@ public class RecruitTabFragment extends Fragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            ft.add(linearLayout.getId(), new ActionRowFragment("I am Frag 1"), "someTag1");
-            ft.add(linearLayout.getId(), new ActionRowFragment("Ttest"), "someTag2");
+            actionRowFragments.add(new ActionRowFragment("I am Frag 1"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "someTag1");
+
+            actionRowFragments.add(new ActionRowFragment("I am Frag 2"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "someTag2");
 
             ft.commit();
         }
 
+        public void incrementProgressBars () {
+            for (ActionRowFragment arf  : actionRowFragments) {
+                int originalValue = arf.getProgressBarValue();
+                arf.setProgressBarValue((originalValue + 1) % 100);
+            }
+        }
     }
 }

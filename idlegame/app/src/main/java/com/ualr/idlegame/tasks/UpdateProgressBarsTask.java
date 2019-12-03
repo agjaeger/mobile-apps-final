@@ -14,7 +14,7 @@ public class UpdateProgressBarsTask extends AsyncTask<Void, View, Void> {
         try {
             while (true) {
                 publishProgress();
-                Thread.sleep(1000);
+                Thread.sleep(10);
                 if (isCancelled()) break;
             }
         } catch (Exception e) {}
