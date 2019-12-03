@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             public void onClick(View view) {
             System.out.println("Hello World");
             }
-        });
-
+        });*/
     }
 
     @Override
