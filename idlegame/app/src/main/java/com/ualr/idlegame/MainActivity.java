@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
-import com.snappydb.DB;
-import com.snappydb.DBFactory;
+
 import com.snappydb.SnappydbException;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, UpdateProgressBarsTask.OnTickListener {
