@@ -47,6 +47,14 @@ public class ActionRowFragment extends Fragment {
         return 0;
     }
 
+    public Boolean purchased () {
+        if (viewHolder != null) {
+            return viewHolder.getPurchased();
+        }
+
+        return false;
+    }
+
     public class ActionRowFragmentViewHolder {
         private TextView costTextLabel;
         private TextView typeTextLabel;

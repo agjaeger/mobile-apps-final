@@ -92,13 +92,15 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         @Override
         public void incrementProgress () {
             for (ActionRowFragment arf  : actionRowFragments) {
-                int nextValue = arf.getProgressBarValue() + 1;
+                if (arf.purchased()) {
+                    int nextValue = arf.getProgressBarValue() + 1;
 
-                if (nextValue >= 100) {
-                    onProgressViewHolderListener.onComplete();
-                    arf.setProgressBarValue(0);
-                } else {
-                    arf.setProgressBarValue(nextValue);
+                    if (nextValue >= 100) {
+                        onProgressViewHolderListener.onComplete();
+                        arf.setProgressBarValue(0);
+                    } else {
+                        arf.setProgressBarValue(nextValue);
+                    }
                 }
             }
         }
