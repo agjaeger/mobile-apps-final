@@ -13,18 +13,20 @@ import android.widget.LinearLayout;
 
 import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.ActionRowFragment;
+import com.ualr.idlegame.fragments.TabFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecruitTabFragment extends Fragment {
+public class RecruitTabFragment extends Fragment implements TabFragment {
     RecruitTabFragmentViewHolder viewHolder = null;
     AppDataViewModel viewModel = null;
 
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // inflate and populate view
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
 
@@ -32,6 +34,11 @@ public class RecruitTabFragment extends Fragment {
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
 
         return view;
+    }
+
+    @Override
+    public void onTick () {
+
     }
 
     public void incrementProgressBars () {

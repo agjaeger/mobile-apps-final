@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         tabFragmentPager = new TabFragmentPager (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(tabFragmentPager);
 
+        // View Pager will persistently store every page in the background
+        viewPager.setOffscreenPageLimit(tabLayout.getTabCount());
+
         tabLayout.addOnTabSelectedListener(this);
 
         // set the first tab as active on startup
