@@ -1,6 +1,7 @@
 package com.ualr.idlegame;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
 
 import com.snappydb.SnappydbException;
+import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, UpdateProgressBarsTask.OnTickListener {
 
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private ViewPager viewPager;
     private TabFragmentPager tabFragmentPager;
 
+    private AppDataViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         // launch background thread to calculate ticks
         bgTickThread.onTickListener = this;
         bgTickThread.execute();
+
+        // get App Data View Model
+        viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
 
         // open the database for the application
         try {

@@ -3,6 +3,7 @@ package com.ualr.idlegame.fragments.tabs;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,17 +13,23 @@ import android.widget.LinearLayout;
 
 import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.ActionRowFragment;
+import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecruitTabFragment extends Fragment {
     RecruitTabFragmentViewHolder viewHolder = null;
+    AppDataViewModel viewModel = null;
+
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
+
+        // get App Data View Model
+        viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
 
         return view;
     }
