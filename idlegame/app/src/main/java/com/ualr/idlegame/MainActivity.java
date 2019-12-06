@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -12,14 +13,16 @@ import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
+import com.ualr.idlegame.tasks.AutoSaveTask;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
 
 import com.snappydb.SnappydbException;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
-public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, UpdateProgressBarsTask.OnTickListener {
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     private UpdateProgressBarsTask bgTickThread = new UpdateProgressBarsTask();
+    private AutoSaveTask bgAutosaveThread = new AutoSaveTask();
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -33,11 +36,33 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         setContentView(R.layout.activity_main);
 
         // launch background thread to calculate ticks
-        bgTickThread.onTickListener = this;
-        bgTickThread.execute();
+        bgTickThread.onTickListener = new UpdateProgressBarsTask.OnTickListener() {
+            @Override
+            public void onTick() {
+                Object[] fragments = tabFragmentPager.getFragments();
+
+                for (Object f : fragments) {
+                    ((TabFragment)f).onTick();
+                }
+            }
+        };
+        bgTickThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        // launch autosave thread
+        bgAutosaveThread.onAutoSaveListener = new AutoSaveTask.OnAutoSaveListener() {
+            @Override
+            public void onAutosave() {
+                System.out.println("Autosaving!");
+                System.out.println(viewModel.getResourceValue("power"));
+            }
+        };
+        bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
+
+        // register resources
+        viewModel.registerResource("power");
 
         // open the database for the application
         try {
@@ -85,14 +110,5 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabReselected (TabLayout.Tab tab) {
 
-    }
-
-    @Override
-    public void onTick () {
-        Object[] fragments = tabFragmentPager.getFragments();
-
-        for (Object f : fragments) {
-            ((TabFragment)f).onTick();
-        }
     }
 }

@@ -34,7 +34,8 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         viewHolder.onProgressViewHolderListener = new OnProgressViewHolder() {
             @Override
             public void onComplete() {
-
+                System.out.println("PROGRESS COMPLETE");
+                viewModel.incrementResource("power", 10);
             }
         };
 
