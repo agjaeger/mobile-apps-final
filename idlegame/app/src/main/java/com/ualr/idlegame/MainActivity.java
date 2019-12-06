@@ -1,9 +1,9 @@
 package com.ualr.idlegame;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -11,15 +11,16 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+
 import com.ualr.idlegame.db.DatabaseManager;
+import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
-import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.tasks.AutoSaveTask;
 import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
+import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import com.snappydb.SnappydbException;
-import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TabFragmentPager tabFragmentPager;
+    private ResourcesPaneFragment resourcesPane;
 
     private AppDataViewModel viewModel;
 
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         // set the first tab as active on startup
         tabFragmentPager.setActive(0);
         viewPager.setCurrentItem(0, true);
+
+        // load resources pane
+        resourcesPane = new ResourcesPaneFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.resourcepane_placeholder, resourcesPane);
+        ft.commit();
     }
 
     @Override
