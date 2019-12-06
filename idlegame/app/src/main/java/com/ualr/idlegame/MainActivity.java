@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             @Override
             public void onCount () {
                 Context context = getApplicationContext();
-                CharSequence text = "Autosaving! " + viewModel.getResourceValue("power");
+                CharSequence text = "Autosaving!";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         bgResourceDisplayUpdateThread.onCountListener = new CounterTask.OnCountListener() {
             @Override
             public void onCount () {
-
+                resourcesPane.update();
             }
         };
-        bgResourceDisplayUpdateThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 1000);
+        bgResourceDisplayUpdateThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 500);
 
 
         // get App Data View Model
@@ -103,11 +103,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         viewPager = findViewById(R.id.viewPager);
         tabFragmentPager = new TabFragmentPager (getSupportFragmentManager());
         viewPager.setAdapter(tabFragmentPager);
+        tabLayout.addOnTabSelectedListener(this);
 
         // View Pager will persistently store every page in the background
         viewPager.setOffscreenPageLimit(tabLayout.getTabCount());
-
-        tabLayout.addOnTabSelectedListener(this);
 
         // set the first tab as active on startup
         tabFragmentPager.setActive(0);
