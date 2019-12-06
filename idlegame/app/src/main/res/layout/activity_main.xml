@@ -19,240 +19,19 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="@+id/viewPager"
-        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="center" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
+    <FrameLayout
+        android:id="@+id/resourcepane_placeholder"
         android:layout_width="216dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="60dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/total_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Total"
-                app:layout_constraintStart_toStartOf="@+id/divider"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-            <TextView
-                android:id="@+id/total_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="180000"
-                app:layout_constraintEnd_toEndOf="@+id/divider"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-            <TextView
-                android:id="@+id/army_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="8dp"
-                android:text="Army"
-                app:layout_constraintBottom_toTopOf="@+id/divider2"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="214dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="160dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toTopOf="@+id/divider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/footmen_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Footmen"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/divider2" />
-
-            <TextView
-                android:id="@+id/minutemen_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Minutemen"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/footmen_label" />
-
-            <TextView
-                android:id="@+id/artillery_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Artillery"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/minutemen_label" />
-
-            <TextView
-                android:id="@+id/calvery_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Calvery"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/artillery_label" />
-
-            <TextView
-                android:id="@+id/kakarot_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Kakarot"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/calvery_label" />
-
-            <TextView
-                android:id="@+id/footmen_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2" />
-
-            <TextView
-                android:id="@+id/minutemen_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/footmen_value" />
-
-            <TextView
-                android:id="@+id/artillery_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/minutemen_value" />
-
-            <TextView
-                android:id="@+id/calvery_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artillery_value" />
-
-            <TextView
-                android:id="@+id/kakarot_value"
-                android:layout_width="9dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calvery_value" />
-
-            <TextView
-                android:id="@+id/resources_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="8dp"
-                android:text="Resources"
-                app:layout_constraintBottom_toTopOf="@+id/divider3"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/power_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Power"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-            <TextView
-                android:id="@+id/power_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-            <TextView
-                android:id="@+id/money_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Money"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/power_label" />
-
-            <TextView
-                android:id="@+id/money_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/power_value" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -260,7 +39,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/space"
-        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toBottomOf="@+id/tablayout_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
