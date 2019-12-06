@@ -1,7 +1,6 @@
 package com.ualr.idlegame.fragments.tabs;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -13,7 +12,9 @@ import android.widget.LinearLayout;
 
 import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.ActionRowFragment;
-import com.ualr.idlegame.fragments.TabFragment;
+import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
+import com.ualr.idlegame.fragments.interfaces.ProgressViewHolder;
+import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import java.util.ArrayList;
@@ -23,12 +24,19 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
     RecruitTabFragmentViewHolder viewHolder = null;
     AppDataViewModel viewModel = null;
 
-
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // inflate and populate view
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
+
+        // setup callback for when the progress bar completes.
+        viewHolder.onProgressViewHolderListener = new OnProgressViewHolder() {
+            @Override
+            public void onComplete() {
+
+            }
+        };
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
@@ -38,19 +46,17 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
     @Override
     public void onTick () {
-
-    }
-
-    public void incrementProgressBars () {
         if (viewHolder != null) {
-            viewHolder.incrementProgressBars();
+            viewHolder.incrementProgress();
         }
     }
 
-    public class RecruitTabFragmentViewHolder {
+    public class RecruitTabFragmentViewHolder implements ProgressViewHolder {
         private LinearLayout linearLayout;
 
         private List<ActionRowFragment> actionRowFragments = new ArrayList();
+        public OnProgressViewHolder onProgressViewHolderListener;
+
 
         public RecruitTabFragmentViewHolder (View view) {
             linearLayout = view.findViewById(R.id.linear_layout);
@@ -66,10 +72,17 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             ft.commit();
         }
 
-        public void incrementProgressBars () {
+        @Override
+        public void incrementProgress () {
             for (ActionRowFragment arf  : actionRowFragments) {
-                int originalValue = arf.getProgressBarValue();
-                arf.setProgressBarValue((originalValue + 1) % 100);
+                int nextValue = arf.getProgressBarValue() + 1;
+
+                if (nextValue >= 100) {
+                    onProgressViewHolderListener.onComplete();
+                    arf.setProgressBarValue(0);
+                } else {
+                    arf.setProgressBarValue(nextValue);
+                }
             }
         }
     }

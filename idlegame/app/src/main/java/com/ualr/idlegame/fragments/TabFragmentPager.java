@@ -42,4 +42,8 @@ public class TabFragmentPager extends FragmentStatePagerAdapter {
     public Fragment getActive () {
         return active;
     }
+
+    public Object[] getFragments () {
+        return fragmentMap.values().toArray();
+    }
 }

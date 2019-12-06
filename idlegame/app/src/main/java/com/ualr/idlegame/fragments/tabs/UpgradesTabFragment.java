@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.fragments.TabFragment;
-
-import java.lang.annotation.Inherited;
+import com.ualr.idlegame.fragments.interfaces.TabFragment;
 
 public class UpgradesTabFragment extends Fragment implements TabFragment {
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.fragments.TabFragment;
+import com.ualr.idlegame.fragments.interfaces.TabFragment;
 
 public class ArmyTabFragment extends Fragment implements TabFragment {
 
