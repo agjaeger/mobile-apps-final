@@ -19,12 +19,12 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="@+id/viewPager"
-        app:layout_constraintStart_toEndOf="@+id/resourcespane"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="center"/>
+        app:tabGravity="center" />
 
-    <View
-        android:id="@+id/resourcespane"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="216dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,8 +37,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/space"
-        app:layout_constraintStart_toEndOf="@+id/resourcespane"
-        app:layout_constraintTop_toBottomOf="@+id/tablayout_parent"
-    />
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
