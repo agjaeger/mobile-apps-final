@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         // find and setup viewpager
         viewPager = findViewById(R.id.viewPager);
-        tabFragmentPager = new TabFragmentPager (getSupportFragmentManager(), tabLayout.getTabCount());
+        tabFragmentPager = new TabFragmentPager (getSupportFragmentManager());
         viewPager.setAdapter(tabFragmentPager);
 
         // View Pager will persistently store every page in the background

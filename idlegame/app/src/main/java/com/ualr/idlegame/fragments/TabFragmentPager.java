@@ -9,45 +9,34 @@ import com.ualr.idlegame.fragments.tabs.MapTabFragment;
 import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TabFragmentPager extends FragmentStatePagerAdapter {
-
-    int tabCount;
     Fragment active = null;
+    Map<Integer, Fragment> fragmentMap = new HashMap<>();
 
-    public TabFragmentPager (FragmentManager fm, int tabCount) {
+    public TabFragmentPager (FragmentManager fm) {
         super(fm);
-        this.tabCount = tabCount;
+
+        fragmentMap.put(0, new RecruitTabFragment());
+        fragmentMap.put(1, new ArmyTabFragment());
+        fragmentMap.put(2, new UpgradesTabFragment());
+        fragmentMap.put(3, new MapTabFragment());
     }
 
     @Override
     public Fragment getItem (int position) {
-        setActive(position);
-        return active;
+        return fragmentMap.get(position);
     }
 
     public void setActive (int position) {
-        switch (position) {
-            case 0:
-                active = new RecruitTabFragment();
-                break;
-            case 1:
-                active = new ArmyTabFragment();
-                break;
-            case 2:
-                active = new UpgradesTabFragment();
-                break;
-            case 3:
-                active = new MapTabFragment();
-                break;
-
-            default:
-                active =  null;
-        }
+        active = fragmentMap.get(position);
     }
 
     @Override
     public int getCount() {
-        return tabCount;
+        return fragmentMap.size();
     }
 
     public Fragment getActive () {
