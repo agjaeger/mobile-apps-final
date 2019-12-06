@@ -9,13 +9,19 @@ import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
+import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 public class UpgradesTabFragment extends Fragment implements TabFragment {
+    private UpgradesTabFragment.UpgradesTabFragmentViewHolder viewHolder = null;
+    private AppDataViewModel viewModel = null;
     private boolean mActive = false;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
+        View view =  inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
+        viewHolder = new UpgradesTabFragment.UpgradesTabFragmentViewHolder(view);
+        return view;
+        //return inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
     }
 
     @Override
@@ -37,4 +43,13 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
     public void deactivate () {
         mActive = false;
     }
+
+
+    public class UpgradesTabFragmentViewHolder {
+
+        public UpgradesTabFragmentViewHolder(View view){
+        }
+
+    }
+
 }
