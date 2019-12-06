@@ -3,17 +3,17 @@ package com.ualr.idlegame.tasks;
 import android.os.AsyncTask;
 import android.view.View;
 
-public class AutoSaveTask extends AsyncTask<Void, View, Void> {
+public class CounterTask extends AsyncTask<Integer, View, Void> {
 
-    public AutoSaveTask.OnAutoSaveListener onAutoSaveListener;
-    public interface OnAutoSaveListener {
-        void onAutosave ();
+    public CounterTask.OnCountListener onCountListener;
+    public interface OnCountListener {
+        void onCount ();
     }
 
-    protected Void doInBackground(Void... params) {
+    protected Void doInBackground(Integer... params) {
         try {
             while (true) {
-                Thread.sleep(10000);
+                Thread.sleep(params[0]);
                 publishProgress();
                 if (isCancelled()) break;
             }
@@ -23,6 +23,6 @@ public class AutoSaveTask extends AsyncTask<Void, View, Void> {
     }
 
     protected void onProgressUpdate(View... progress) {
-        onAutoSaveListener.onAutosave();
+        onCountListener.onCount();
     }
 }

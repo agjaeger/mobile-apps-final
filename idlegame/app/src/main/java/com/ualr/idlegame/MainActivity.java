@@ -16,16 +16,16 @@ import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
-import com.ualr.idlegame.tasks.AutoSaveTask;
-import com.ualr.idlegame.tasks.UpdateProgressBarsTask;
+import com.ualr.idlegame.tasks.CounterTask;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import com.snappydb.SnappydbException;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
-    private UpdateProgressBarsTask bgTickThread = new UpdateProgressBarsTask();
-    private AutoSaveTask bgAutosaveThread = new AutoSaveTask();
+    private CounterTask bgTickThread = new CounterTask();
+    private CounterTask bgAutosaveThread = new CounterTask();
+    private CounterTask bgResourceDisplayUpdateThread = new CounterTask();
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         setContentView(R.layout.activity_main);
 
         // launch background thread to calculate ticks
-        bgTickThread.onTickListener = new UpdateProgressBarsTask.OnTickListener() {
+        bgTickThread.onCountListener = new CounterTask.OnCountListener() {
             @Override
-            public void onTick() {
+            public void onCount () {
                 Object[] fragments = tabFragmentPager.getFragments();
 
                 for (Object f : fragments) {
@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 }
             }
         };
-        bgTickThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        bgTickThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10);
 
         // launch autosave thread
-        bgAutosaveThread.onAutoSaveListener = new AutoSaveTask.OnAutoSaveListener() {
+        bgAutosaveThread.onCountListener = new CounterTask.OnCountListener() {
             @Override
-            public void onAutosave() {
+            public void onCount () {
                 Context context = getApplicationContext();
                 CharSequence text = "Autosaving! " + viewModel.getResourceValue("power");
                 int duration = Toast.LENGTH_SHORT;
@@ -64,7 +64,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 toast.show();
             }
         };
-        bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10000);
+
+        // launch thread to periodically update the resource pane
+        bgResourceDisplayUpdateThread.onCountListener = new CounterTask.OnCountListener() {
+            @Override
+            public void onCount () {
+
+            }
+        };
+        bgResourceDisplayUpdateThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 1000);
+
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
