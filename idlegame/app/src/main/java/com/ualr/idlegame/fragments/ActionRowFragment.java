@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -47,20 +48,37 @@ public class ActionRowFragment extends Fragment {
     }
 
     public class ActionRowFragmentViewHolder {
-        private ProgressBar progressBar;
-
         private TextView costTextLabel;
         private TextView typeTextLabel;
         private TextView gainedTextLabel;
 
-        public ActionRowFragmentViewHolder (View view) {
-            progressBar = view.findViewById(R.id.progress_bar);
+        private ProgressBar progressBar;
+        private Button purchaseButton;
 
+        private boolean purchased;
+
+        public ActionRowFragmentViewHolder (View view) {
             costTextLabel = view.findViewById(R.id.required_gold_value);
             typeTextLabel = view.findViewById(R.id.units_recruited_type);
             gainedTextLabel = view.findViewById(R.id.units_recruited_value);
 
-            progressBar.setProgress(0);
+            progressBar = view.findViewById(R.id.progress_bar);
+            purchaseButton = view.findViewById(R.id.purchase_btn);
+            purchaseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    purchased = true;
+
+                    setProgressBar(0);
+                    hidePurchaseButton();
+                    showProgressBar();
+                }
+            });
+
+            // setup initial state
+            purchased = false;
+            //disablePurchaseButton();
+            hideProgressBar();
         }
 
         public void setCostTextLabel (String textLabel) { costTextLabel.setText(textLabel); }
@@ -71,5 +89,23 @@ public class ActionRowFragment extends Fragment {
         public int getProgressBar () {
             return progressBar.getProgress();
         }
+
+        public void enablePurchaseButton () {
+            purchaseButton.setEnabled(true);
+        }
+
+        public void disablePurchaseButton () {
+            purchaseButton.setEnabled(false);
+        }
+
+        public Boolean getPurchased () {
+            return purchased;
+        }
+
+        private void hideProgressBar () { progressBar.setVisibility(View.INVISIBLE); }
+        private void showProgressBar () { progressBar.setVisibility(View.VISIBLE); }
+
+        private void hidePurchaseButton () { purchaseButton.setVisibility(View.INVISIBLE); }
+        private void showPurchaseButton () { purchaseButton.setVisibility(View.VISIBLE); }
     }
 }
