@@ -1,5 +1,5 @@
 package com.ualr.idlegame.fragments.interfaces;
 
 public interface OnProgressViewHolder {
-    public void onComplete ();
+    public void onComplete (int increment);
 }

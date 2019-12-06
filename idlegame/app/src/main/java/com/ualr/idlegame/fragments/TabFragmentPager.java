@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.fragments.tabs.ArmyTabFragment;
 import com.ualr.idlegame.fragments.tabs.MapTabFragment;
 import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
@@ -31,7 +32,14 @@ public class TabFragmentPager extends FragmentStatePagerAdapter {
     }
 
     public void setActive (int position) {
+        // deactivate every fragment
+        for (Map.Entry<Integer, Fragment> entry : fragmentMap.entrySet()) {
+            ((TabFragment) entry.getValue()).deactivate();
+        }
+
+        // active the newly selected fragment
         active = fragmentMap.get(position);
+        ((TabFragment) active).activate();
     }
 
     @Override
