@@ -24,5 +24,4 @@ public class AppDataViewModel extends ViewModel {
     public void incrementResource (String resourceName, Integer amount) {
         resourceMap.put(resourceName, resourceMap.get(resourceName) + amount);
     }
-
 }

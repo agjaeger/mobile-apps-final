@@ -13,8 +13,8 @@ public class AutoSaveTask extends AsyncTask<Void, View, Void> {
     protected Void doInBackground(Void... params) {
         try {
             while (true) {
-                publishProgress();
                 Thread.sleep(10000);
+                publishProgress();
                 if (isCancelled()) break;
             }
         } catch (Exception e) {}

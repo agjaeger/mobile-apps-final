@@ -17,8 +17,10 @@ import com.ualr.idlegame.fragments.interfaces.ProgressViewHolder;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RecruitTabFragment extends Fragment implements TabFragment {
     RecruitTabFragmentViewHolder viewHolder = null;
@@ -64,11 +66,25 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            actionRowFragments.add(new ActionRowFragment("I am Frag 1"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "someTag1");
+            // Newspaper
+            actionRowFragments.add(constructActionRowFragment("0", "Newspaper Ad", "+1"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
-            actionRowFragments.add(new ActionRowFragment("I am Frag 2"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "someTag2");
+            // Town Crier
+            actionRowFragments.add(constructActionRowFragment("40", "Town Crier", "+10"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
+
+            // Propaganda
+            actionRowFragments.add(constructActionRowFragment("250", "Spread Propaganda", "+100"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
+
+            // Celebrity
+            actionRowFragments.add(constructActionRowFragment("1500", "Celebrity Endorsement", "+1000"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
+
+            // Dragon balls
+            actionRowFragments.add(constructActionRowFragment("80000", "Gather Dragon Balls", "+9001"));
+            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             ft.commit();
         }
@@ -85,6 +101,24 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
                     arf.setProgressBarValue(nextValue);
                 }
             }
+        }
+
+        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel) {
+            Bundle bundle = new Bundle();
+            bundle.putString("costLabel", costLabel);
+            bundle.putString("typeLabel", typeLabel);
+            bundle.putString("valueLabel", valueLabel);
+
+            ActionRowFragment arf = new ActionRowFragment();
+            arf.setArguments(bundle);
+
+            return arf;
+        }
+
+        private String getRandomKey () {
+            byte[] array = new byte[7]; // length is bounded by 7
+            new Random().nextBytes(array);
+            return new String(array, Charset.forName("UTF-8"));
         }
     }
 }
