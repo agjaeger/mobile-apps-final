@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ualr.idlegame.db.DatabaseManager;
@@ -52,8 +54,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         bgAutosaveThread.onAutoSaveListener = new AutoSaveTask.OnAutoSaveListener() {
             @Override
             public void onAutosave() {
-                System.out.println("Autosaving!");
-                System.out.println(viewModel.getResourceValue("power"));
+                Context context = getApplicationContext();
+                CharSequence text = "Autosaving! " + viewModel.getResourceValue("power");
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         };
         bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
