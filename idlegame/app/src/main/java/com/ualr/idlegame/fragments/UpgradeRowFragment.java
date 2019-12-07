@@ -44,7 +44,21 @@ public class UpgradeRowFragment extends Fragment {
             purchasedTextLabel = view.findViewById(R.id.purchased_label);
 
             purchaseButton = view.findViewById((R.id.purchase_btn));
+            purchaseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    purchased = true;
+
+                    hidePurchaseButton();
+                    disablePurchaseButton();
+                    showPurchaseTextLabel();
+                }
+            });
+
             purchased = false;
+
+            enablePurchaseButton();
+            hidePurchaseTextLabel();
         }
 
         public void setCostTextLabel (String textLabel) { costTextLabel.setText(textLabel); }
