@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                viewModel.saveDataToDB();
             }
         };
         bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10000);
@@ -75,20 +77,21 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         };
         bgResourceDisplayUpdateThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 500);
 
+        // open the database for the application
+        DatabaseManager.getInstance().open(getApplicationContext());
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
 
+        // clear old data
+        viewModel.resetData();
+
         // register resources
         viewModel.registerResource("power");
 
-        // open the database for the application
-        try {
-            DatabaseManager.getInstance().open(getApplicationContext());
-        } catch (SnappydbException sde) {
-            System.out.println("Unable to open the database!");
-            System.exit(1);
-        }
+        // restore data from database
+        viewModel.restoreDataFromDatabase();
+
 
         // find tablayout view and populate with Tabs
         tabLayout = findViewById(R.id.tablayout_parent);
