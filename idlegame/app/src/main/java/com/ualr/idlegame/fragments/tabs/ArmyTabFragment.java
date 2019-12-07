@@ -36,7 +36,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
         // setup callback for when the progress bar completes.
         viewHolder.onProgressViewHolderListener = new OnProgressViewHolder() {
             @Override
-            public void onComplete (int increment) {
+            public void onComplete (String[] resources, int increment) {
                 //System.out.println("PROGRESS COMPLETE");
                 viewModel.incrementResource("power", increment);
             }
@@ -130,7 +130,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
             arf.onProgressViewHolder = new OnProgressViewHolder() {
                 @Override
-                public void onComplete (int increment) {
+                public void onComplete (String[] resource, int increment) {
                     viewModel.incrementResource("money", increment);
                 }
             };

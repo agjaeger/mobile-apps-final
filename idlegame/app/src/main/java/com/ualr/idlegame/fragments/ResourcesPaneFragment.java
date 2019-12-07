@@ -31,6 +31,12 @@ public class ResourcesPaneFragment extends Fragment {
     public void update () {
         viewHolder.powerValue.setText(viewModel.getResourceValue("power").toString());
         viewHolder.moneyValue.setText(viewModel.getResourceValue("money").toString());
+
+        viewHolder.footmenValue.setText(viewModel.getResourceValue("footmen").toString());
+        viewHolder.minutemenValue.setText(viewModel.getResourceValue("minutemen").toString());
+        viewHolder.artilleryValue.setText(viewModel.getResourceValue("artillery").toString());
+        viewHolder.calveryValue.setText(viewModel.getResourceValue("calvery").toString());
+        viewHolder.kakarotValue.setText(viewModel.getResourceValue("kakarot").toString());
     }
 
     private class ResourcesPaneFragmentViewHolder {
@@ -38,9 +44,22 @@ public class ResourcesPaneFragment extends Fragment {
         public TextView powerValue;
         public TextView moneyValue;
 
+        public TextView footmenValue;
+        public TextView minutemenValue;
+        public TextView artilleryValue;
+        public TextView calveryValue;
+        public TextView kakarotValue;
+
+
         public ResourcesPaneFragmentViewHolder (View view) {
             powerValue = view.findViewById(R.id.power_value);
             moneyValue = view.findViewById(R.id.money_value);
+
+            footmenValue = view.findViewById(R.id.footmen_value);
+            minutemenValue = view.findViewById(R.id.minutemen_value);
+            artilleryValue = view.findViewById(R.id.artillery_value);
+            calveryValue = view.findViewById(R.id.calvery_value);
+            kakarotValue = view.findViewById(R.id.kakarot_value);
         }
     }
 }

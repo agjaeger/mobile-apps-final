@@ -18,7 +18,9 @@ public class ActionRowFragment extends Fragment {
     public OnProgressViewHolder onProgressViewHolder;
 
     private ActionRowFragmentViewHolder viewHolder;
+
     private int increment;
+    private String resource;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ActionRowFragment extends Fragment {
     public void incrementProgressBar () {
         int nextValue = viewHolder.getProgressBar() + 1;
         if (nextValue >= 100) {
-            onProgressViewHolder.onComplete(increment);
+            onProgressViewHolder.onComplete(resource.split(","), increment);
             viewHolder.setProgressBar(0);
         } else {
             viewHolder.setProgressBar(nextValue);
@@ -67,6 +69,7 @@ public class ActionRowFragment extends Fragment {
     public void setIncrement (int p_increment) {
         increment = p_increment;
     }
+    public void setResource (String p_resource) { resource = p_resource; }
 
     public class ActionRowFragmentViewHolder {
         private TextView costTextLabel;

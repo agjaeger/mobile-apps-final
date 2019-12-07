@@ -87,8 +87,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         viewModel.resetData();
 
         // register resources
-        viewModel.registerResource("power");
-        viewModel.registerResource("money");
+        registerResources(viewModel);
 
         // restore data from database
         viewModel.restoreDataFromDatabase();
@@ -137,5 +136,16 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabReselected (TabLayout.Tab tab) {
 
+    }
+
+    private void registerResources (AppDataViewModel vm) {
+        viewModel.registerResource("power");
+        viewModel.registerResource("money");
+
+        viewModel.registerResource("footmen");
+        viewModel.registerResource("minutemen");
+        viewModel.registerResource("artillery");
+        viewModel.registerResource("calvery");
+        viewModel.registerResource("kakarot");
     }
 }
