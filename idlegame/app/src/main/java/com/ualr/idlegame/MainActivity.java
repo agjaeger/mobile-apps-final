@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         // register resources
         viewModel.registerResource("power");
+        viewModel.registerResource("money");
 
         // restore data from database
         viewModel.restoreDataFromDatabase();

@@ -82,26 +82,26 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            ft.replace(R.id.army_header_placeholder, new ActionHeaderFragment(), getRandomKey());
+            ft.replace(R.id.army_header_placeholder, constructActionHeaderFragment(), getRandomKey());
 
             // Newspaper
-            actionRowFragments.add(constructActionRowFragment("0", "fdsafs Ad", "+1"));
+            actionRowFragments.add(constructActionRowFragment("0", "Dig Ditches", "+1", 1));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "test");
 
             // Town Crier
-            actionRowFragments.add(constructActionRowFragment("40", "Town Crier", "+10"));
+            actionRowFragments.add(constructActionRowFragment("40", "Fortify Town", "+10", 10));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Propaganda
-            actionRowFragments.add(constructActionRowFragment("250", "Spread Propaganda", "+100"));
+            actionRowFragments.add(constructActionRowFragment("250", "Blow Their Socks Off", "+100", 100));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Celebrity
-            actionRowFragments.add(constructActionRowFragment("1500", "Celebrity Endorsement", "+1000"));
+            actionRowFragments.add(constructActionRowFragment("1500", "Illegal Horse Racing", "+1000", 1000));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Dragon balls
-            actionRowFragments.add(constructActionRowFragment("80000", "Gather Dragon Balls", "+9001"));
+            actionRowFragments.add(constructActionRowFragment("80000", "Fight Vegeta", "+9001", 9001));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             ft.commit();
@@ -111,19 +111,12 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
         public void incrementProgress () {
             for (ActionRowFragment arf  : actionRowFragments) {
                 if (arf.purchased()) {
-                    int nextValue = arf.getProgressBarValue() + 1;
-
-                    if (nextValue >= 100) {
-                        onProgressViewHolderListener.onComplete(10);
-                        arf.setProgressBarValue(0);
-                    } else {
-                        arf.setProgressBarValue(nextValue);
-                    }
+                    arf.incrementProgressBar();
                 }
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel) {
+        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer pincrement) {
             Bundle bundle = new Bundle();
             bundle.putString("costLabel", costLabel);
             bundle.putString("typeLabel", typeLabel);
@@ -132,7 +125,28 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
             ActionRowFragment arf = new ActionRowFragment();
             arf.setArguments(bundle);
 
+            // setup callback for when the progress bar completes.
+            arf.setIncrement(pincrement);
+
+            arf.onProgressViewHolder = new OnProgressViewHolder() {
+                @Override
+                public void onComplete (int increment) {
+                    viewModel.incrementResource("money", increment);
+                }
+            };
+
+
             return arf;
+        }
+
+        private ActionHeaderFragment constructActionHeaderFragment () {
+            ActionHeaderFragment ahf = new ActionHeaderFragment();
+
+            ahf.setLeftTextView("Power Req");
+            ahf.setCenterTextView("Action");
+            ahf.setRightTextView("Money Gained");
+
+            return ahf;
         }
 
         private String getRandomKey () {

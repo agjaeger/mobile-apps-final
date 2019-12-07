@@ -34,7 +34,6 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
 
-
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
 
@@ -110,7 +109,7 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer increment) {
+        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer pincrement) {
             Bundle bundle = new Bundle();
             bundle.putString("costLabel", costLabel);
             bundle.putString("typeLabel", typeLabel);
@@ -120,7 +119,7 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             arf.setArguments(bundle);
 
             // setup increment amount
-            arf.setIncrement(increment);
+            arf.setIncrement(pincrement);
 
             // setup callback for when the progress bar completes.
             arf.onProgressViewHolder = new OnProgressViewHolder() {

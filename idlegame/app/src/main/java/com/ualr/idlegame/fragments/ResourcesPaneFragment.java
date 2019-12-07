@@ -29,19 +29,18 @@ public class ResourcesPaneFragment extends Fragment {
     }
 
     public void update () {
-        viewHolder.setPowerValue(viewModel.getResourceValue("power").toString());
+        viewHolder.powerValue.setText(viewModel.getResourceValue("power").toString());
+        viewHolder.moneyValue.setText(viewModel.getResourceValue("money").toString());
     }
 
-    public class ResourcesPaneFragmentViewHolder {
+    private class ResourcesPaneFragmentViewHolder {
 
-        TextView powerValue;
+        public TextView powerValue;
+        public TextView moneyValue;
 
         public ResourcesPaneFragmentViewHolder (View view) {
             powerValue = view.findViewById(R.id.power_value);
-        }
-
-        public void setPowerValue (String value) {
-            powerValue.setText(value);
+            moneyValue = view.findViewById(R.id.money_value);
         }
     }
 }
