@@ -52,6 +52,9 @@ public class MapTabFragment extends Fragment implements TabFragment {
             imageView = view.findViewById(R.id.map_placeholder);
         }
 
+        public void setImage(int imageID) {
+            this.imageView.setImageResource(imageID);
+        }
     }
 
 }
