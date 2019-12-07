@@ -50,6 +50,12 @@ public class MapTabFragment extends Fragment implements TabFragment {
 
         public MapTabFragmentViewHolder(View view){
             imageView = view.findViewById(R.id.map_placeholder);
+            imageView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    setImage(R.drawable.map2);
+                }
+            });
         }
 
         public void setImage(int imageID) {
