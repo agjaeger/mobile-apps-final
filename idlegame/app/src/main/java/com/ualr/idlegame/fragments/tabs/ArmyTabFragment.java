@@ -127,11 +127,13 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
             // setup callback for when the progress bar completes.
             arf.setIncrement(pincrement);
+            arf.setResource("money");
 
             arf.onProgressViewHolder = new OnProgressViewHolder() {
                 @Override
-                public void onComplete (String[] resource, int increment) {
-                    viewModel.incrementResource("money", increment);
+                public void onComplete (String[] resources, int increment) {
+                    for (String resource : resources)
+                    viewModel.incrementResource(resource, increment);
                 }
             };
 
