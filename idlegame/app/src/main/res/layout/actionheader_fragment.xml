@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/required_gold_value"
+                android:id="@+id/leftTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -34,18 +34,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/units_recruited_type"
+                android:id="@+id/centerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/units_recruited_value"
-                app:layout_constraintStart_toEndOf="@+id/required_gold_value"
+                app:layout_constraintEnd_toStartOf="@+id/rightTextView"
+                app:layout_constraintStart_toEndOf="@+id/leftTextView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.545" />
 
             <TextView
-                android:id="@+id/units_recruited_value"
+                android:id="@+id/rightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"

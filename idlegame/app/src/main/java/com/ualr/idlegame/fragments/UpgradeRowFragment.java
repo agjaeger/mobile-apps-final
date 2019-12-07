@@ -38,7 +38,7 @@ public class UpgradeRowFragment extends Fragment {
         private boolean purchased;
 
         public UpgradeRowFragmentViewHolder (View view){
-            costTextLabel = view.findViewById(R.id.required_gold_value);
+            costTextLabel = view.findViewById(R.id.leftTextView);
             nameTextLabel = view.findViewById(R.id.upgrade_type);
             bonusTextLabel = view.findViewById(R.id.bonus_value);
             purchasedTextLabel = view.findViewById(R.id.purchased_label);

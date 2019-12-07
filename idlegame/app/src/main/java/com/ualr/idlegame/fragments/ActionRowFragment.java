@@ -13,9 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
 
-import java.util.Map;
-import java.util.Random;
-
 
 public class ActionRowFragment extends Fragment {
     public OnProgressViewHolder onProgressViewHolder;
@@ -82,9 +79,9 @@ public class ActionRowFragment extends Fragment {
         private boolean purchased;
 
         public ActionRowFragmentViewHolder (View view) {
-            costTextLabel = view.findViewById(R.id.required_gold_value);
-            typeTextLabel = view.findViewById(R.id.units_recruited_type);
-            gainedTextLabel = view.findViewById(R.id.units_recruited_value);
+            costTextLabel = view.findViewById(R.id.leftTextView);
+            typeTextLabel = view.findViewById(R.id.centerTextView);
+            gainedTextLabel = view.findViewById(R.id.rightTextView);
 
             progressBar = view.findViewById(R.id.progress_bar);
             purchaseButton = view.findViewById(R.id.purchase_btn);

@@ -75,7 +75,8 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            ft.replace(R.id.header_placeholder, new ActionHeaderFragment(), getRandomKey());
+
+            ft.replace(R.id.header_placeholder, constructActionHeaderFragment(), getRandomKey());
 
             // Newspaper
             actionRowFragments.add(constructActionRowFragment("0", "Newspaper Ad", "+1", 1));
@@ -130,6 +131,16 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             };
 
             return arf;
+        }
+
+        private ActionHeaderFragment constructActionHeaderFragment () {
+            ActionHeaderFragment ahf = new ActionHeaderFragment();
+
+            ahf.setLeftTextView("Money Req");
+            ahf.setCenterTextView("Action");
+            ahf.setRightTextView("Power Gained");
+
+            return ahf;
         }
 
         private String getRandomKey () {
