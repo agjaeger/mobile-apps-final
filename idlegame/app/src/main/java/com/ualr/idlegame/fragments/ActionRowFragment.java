@@ -21,6 +21,7 @@ public class ActionRowFragment extends Fragment {
     public OnProgressViewHolder onProgressViewHolder;
 
     private ActionRowFragmentViewHolder viewHolder;
+    private int increment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ActionRowFragment extends Fragment {
     public void incrementProgressBar () {
         int nextValue = viewHolder.getProgressBar() + 1;
         if (nextValue >= 100) {
-            onProgressViewHolder.onComplete(10);
+            onProgressViewHolder.onComplete(increment);
             viewHolder.setProgressBar(0);
         } else {
             viewHolder.setProgressBar(nextValue);
@@ -64,6 +65,10 @@ public class ActionRowFragment extends Fragment {
         }
 
         return false;
+    }
+
+    public void setIncrement (int p_increment) {
+        increment = p_increment;
     }
 
     public class ActionRowFragmentViewHolder {

@@ -78,23 +78,23 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             ft.replace(R.id.header_placeholder, new ActionHeaderFragment(), getRandomKey());
 
             // Newspaper
-            actionRowFragments.add(constructActionRowFragment("0", "Newspaper Ad", "+1"));
+            actionRowFragments.add(constructActionRowFragment("0", "Newspaper Ad", "+1", 1));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Town Crier
-            actionRowFragments.add(constructActionRowFragment("40", "Town Crier", "+10"));
+            actionRowFragments.add(constructActionRowFragment("40", "Town Crier", "+10", 10));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Propaganda
-            actionRowFragments.add(constructActionRowFragment("250", "Spread Propaganda", "+100"));
+            actionRowFragments.add(constructActionRowFragment("250", "Spread Propaganda", "+100", 100));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Celebrity
-            actionRowFragments.add(constructActionRowFragment("1500", "Celebrity Endorsement", "+1000"));
+            actionRowFragments.add(constructActionRowFragment("1500", "Celebrity Endorsement", "+1000", 1000));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             // Dragon balls
-            actionRowFragments.add(constructActionRowFragment("80000", "Gather Dragon Balls", "+9001"));
+            actionRowFragments.add(constructActionRowFragment("80000", "Gather Dragon Balls", "+9001", 9001));
             ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
 
             ft.commit();
@@ -109,7 +109,7 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel) {
+        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer increment) {
             Bundle bundle = new Bundle();
             bundle.putString("costLabel", costLabel);
             bundle.putString("typeLabel", typeLabel);
@@ -117,6 +117,9 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             ActionRowFragment arf = new ActionRowFragment();
             arf.setArguments(bundle);
+
+            // setup increment amount
+            arf.setIncrement(increment);
 
             // setup callback for when the progress bar completes.
             arf.onProgressViewHolder = new OnProgressViewHolder() {
