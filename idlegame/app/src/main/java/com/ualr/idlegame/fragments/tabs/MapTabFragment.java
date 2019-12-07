@@ -22,7 +22,8 @@ public class MapTabFragment extends Fragment implements TabFragment {
         View view =  inflater.inflate(R.layout.tab_map_fragment, container, false);
         viewHolder = new MapTabFragmentViewHolder(view);
 
-        return inflater.inflate(R.layout.tab_map_fragment, container, false);
+        return view;
+        //return inflater.inflate(R.layout.tab_map_fragment, container, false);
     }
 
     @Override
