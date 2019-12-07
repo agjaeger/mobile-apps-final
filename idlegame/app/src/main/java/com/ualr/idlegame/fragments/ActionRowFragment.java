@@ -11,15 +11,16 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
+import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
 
 import java.util.Map;
 import java.util.Random;
 
 
 public class ActionRowFragment extends Fragment {
-    private ActionRowFragmentViewHolder viewHolder;
+    public OnProgressViewHolder onProgressViewHolder;
 
-    public ActionRowFragment () {}
+    private ActionRowFragmentViewHolder viewHolder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +32,16 @@ public class ActionRowFragment extends Fragment {
         viewHolder.setGainedTextLabel(getArguments().getString("valueLabel"));
 
         return view;
+    }
+
+    public void incrementProgressBar () {
+        int nextValue = viewHolder.getProgressBar() + 1;
+        if (nextValue >= 100) {
+            onProgressViewHolder.onComplete(10);
+            viewHolder.setProgressBar(0);
+        } else {
+            viewHolder.setProgressBar(nextValue);
+        }
     }
 
     public void setProgressBarValue (int value) {

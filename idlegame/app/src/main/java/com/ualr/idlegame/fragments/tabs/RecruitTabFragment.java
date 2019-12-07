@@ -34,14 +34,6 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
 
-        // setup callback for when the progress bar completes.
-        viewHolder.onProgressViewHolderListener = new OnProgressViewHolder() {
-            @Override
-            public void onComplete (int increment) {
-                //System.out.println("PROGRESS COMPLETE");
-                viewModel.incrementResource("power", increment);
-            }
-        };
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
@@ -112,14 +104,7 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         public void incrementProgress () {
             for (ActionRowFragment arf  : actionRowFragments) {
                 if (arf.purchased()) {
-                    int nextValue = arf.getProgressBarValue() + 1;
-
-                    if (nextValue >= 100) {
-                        onProgressViewHolderListener.onComplete(10);
-                        arf.setProgressBarValue(0);
-                    } else {
-                        arf.setProgressBarValue(nextValue);
-                    }
+                    arf.incrementProgressBar();
                 }
             }
         }
@@ -132,6 +117,14 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             ActionRowFragment arf = new ActionRowFragment();
             arf.setArguments(bundle);
+
+            // setup callback for when the progress bar completes.
+            arf.onProgressViewHolder = new OnProgressViewHolder() {
+                @Override
+                public void onComplete (int increment) {
+                    viewModel.incrementResource("power", increment);
+                }
+            };
 
             return arf;
         }
