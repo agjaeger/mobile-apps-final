@@ -29,6 +29,12 @@
     <integer name="recruit_header_center_idx">1</integer>
     <integer name="recruit_header_right_idx">2</integer>
 
+    <string-array name="recruit_header">
+        <item>Money Req</item>
+        <item>Action</item>
+        <item>Power Gained</item>
+    </string-array>
+
 
     <integer name="recruit_num_rows">5</integer>
 
@@ -89,7 +95,7 @@
     <integer name="default_active_tab">0</integer>
     <integer name="bg_tick_time_ms">10</integer>
     <integer name="bg_autosave_time_ms">10000</integer>
-    <integer name="bg_resource_update_time_ms">10000</integer>
+    <integer name="bg_resource_update_time_ms">1000</integer>
 
 
 

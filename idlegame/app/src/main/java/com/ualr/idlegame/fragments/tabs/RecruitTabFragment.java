@@ -86,7 +86,11 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
             // Generate Action Header Fragment
-            ft.replace(R.id.header_placeholder, constructActionHeaderFragment(), getRandomKey());
+            ft.replace(
+                    R.id.header_placeholder,
+                    constructActionHeaderFragment(resources.getStringArray(R.array.recruit_header)),
+                    getRandomKey()
+            );
 
             // Generate Action Row Fragments
             int recruitNumRows = resources.getInteger(R.integer.recruit_num_rows);
@@ -145,12 +149,20 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             return arf;
         }
 
-        private ActionHeaderFragment constructActionHeaderFragment () {
+        private ActionHeaderFragment constructActionHeaderFragment (String[] headerInfo) {
             ActionHeaderFragment ahf = new ActionHeaderFragment();
 
-            ahf.setLeftTextView("Money Req");
-            ahf.setCenterTextView("Action");
-            ahf.setRightTextView("Power Gained");
+            ahf.setLeftTextView(
+                headerInfo[resources.getInteger(R.integer.recruit_header_left_idx)]
+            );
+
+            ahf.setCenterTextView(
+                headerInfo[resources.getInteger(R.integer.recruit_header_center_idx)]
+            );
+
+            ahf.setRightTextView(
+                headerInfo[resources.getInteger(R.integer.recruit_header_right_idx)]
+            );
 
             return ahf;
         }
