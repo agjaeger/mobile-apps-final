@@ -1,7 +1,6 @@
 package com.ualr.idlegame;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,10 +18,7 @@ import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
 import com.ualr.idlegame.tasks.CounterTask;
-import com.ualr.idlegame.tasks.UpgradeTask;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
-
-import com.snappydb.SnappydbException;
 
 import java.util.List;
 
@@ -31,9 +27,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private CounterTask bgTickThread = new CounterTask();
     private CounterTask bgAutosaveThread = new CounterTask();
     private CounterTask bgResourceDisplayUpdateThread = new CounterTask();
-
-    private UpgradeTask speedUpgradeThread = new UpgradeTask();
-
+    
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TabFragmentPager tabFragmentPager;
@@ -117,23 +111,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 getResources().getInteger(R.integer.bg_tick_time_ms)
         );
 
-        speedUpgradeThread.onUpgradeListener = new UpgradeTask.OnUpgradeListener() {
-            @Override
-            public void onUpgrade() {
-                UpgradesTabFragment fragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
-                if (fragment != null) {
-                    List<String> upgrades = fragment.getUpgrades();
-                    for(int x = 0; x < fragment.getUpgradeSize(); x++){
-                    //    if (upgrades.get(x) == "Double-Time")
-                            System.out.println(fragment.getUpgrades());
-                    }
-
-                }
-
-            }
-        };
-        speedUpgradeThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 500);
-
         // -----------------------------------------------------------------------------------------
         // launch autosave thread
         bgAutosaveThread.onCountListener = new CounterTask.OnCountListener() {
@@ -150,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             }
         };
         bgAutosaveThread.executeOnExecutor(
-                AsyncTask.THREAD_POOL_EXECUTOR,
-                getResources().getInteger(R.integer.bg_autosave_time_ms)
+            AsyncTask.THREAD_POOL_EXECUTOR,
+            getResources().getInteger(R.integer.bg_autosave_time_ms)
         );
 
 
@@ -161,11 +138,21 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             @Override
             public void onCount () {
                 resourcesPane.update();
+
+                UpgradesTabFragment fragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
+                if (fragment != null) {
+                    List<String> upgrades = fragment.getUpgrades();
+                    for(int x = 0; x < fragment.getUpgradeSize(); x++){
+                        //    if (upgrades.get(x) == "Double-Time")
+                        System.out.println(fragment.getUpgrades());
+                    }
+
+                }
             }
         };
         bgResourceDisplayUpdateThread.executeOnExecutor(
-                AsyncTask.THREAD_POOL_EXECUTOR,
-                getResources().getInteger(R.integer.bg_resource_update_time_ms)
+            AsyncTask.THREAD_POOL_EXECUTOR,
+            getResources().getInteger(R.integer.bg_resource_update_time_ms)
         );
 
     }
