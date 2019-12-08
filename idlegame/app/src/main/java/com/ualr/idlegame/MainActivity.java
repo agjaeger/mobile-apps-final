@@ -165,6 +165,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                     viewModel.getResourceValue(getResources().getString(R.string.power_resource))
                 );
 
+                ((UpgradesTabFragment) tabFragmentPager.getItem(2)).tryUnlockAll(
+                        viewModel.getResourceValue(getResources().getString(R.string.money_resource))
+                );
+
                 ((MapTabFragment) tabFragmentPager.getItem(3)).tryUnlockAll(
                     viewModel.getResourceValue(getResources().getString(R.string.power_resource))
                 );
