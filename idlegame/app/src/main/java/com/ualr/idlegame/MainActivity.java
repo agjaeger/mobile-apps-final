@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private CounterTask bgTickThread = new CounterTask();
     private CounterTask bgAutosaveThread = new CounterTask();
     private CounterTask bgResourceDisplayUpdateThread = new CounterTask();
-    
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TabFragmentPager tabFragmentPager;
@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         }
 
-        viewModel.registerResource("footmen");
-        viewModel.registerResource("minutemen");
-        viewModel.registerResource("artillery");
-        viewModel.registerResource("calvery");
-        viewModel.registerResource("kakarot");
+        // register resources
+        String[] armyUnits = getResources().getStringArray(R.array.army_units);
+        for (String unitname : armyUnits) {
+            viewModel.registerResource(unitname);
+        }
 
         // restore data from database
         viewModel.restoreDataFromDatabase();
