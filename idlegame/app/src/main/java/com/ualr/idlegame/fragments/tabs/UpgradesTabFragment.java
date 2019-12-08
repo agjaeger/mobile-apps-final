@@ -63,6 +63,8 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
 
     public List<String> getUpgrades () {return upgrades;}
 
+    public int getUpgradeSize () {return upgrades.size();}
+
 
     public class UpgradesTabFragmentViewHolder {
         private LinearLayout linearLayout;

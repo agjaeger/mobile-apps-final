@@ -24,6 +24,8 @@ import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import com.snappydb.SnappydbException;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     private CounterTask bgTickThread = new CounterTask();
@@ -63,10 +65,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             public void onUpgrade() {
                 UpgradesTabFragment fragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
                 if (fragment != null) {
-                    fragment.getUpgrades();
-                    System.out.println("Hit");
+                    List<String> upgrades = fragment.getUpgrades();
+                    for(int x = 0; x < fragment.getUpgradeSize(); x++){
+                    //    if (upgrades.get(x) == "Double-Time")
+                            System.out.println(fragment.getUpgrades());
+                    }
+
                 }
-                ;
+
             }
         };
 
