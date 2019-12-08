@@ -14,7 +14,7 @@
     <string-array name="resource_names">
         <item>power</item>
         <item>money</item>
-    </string-array>'
+    </string-array>
 
     <string-array name="army_units">
         <item>@string/footmen</item>

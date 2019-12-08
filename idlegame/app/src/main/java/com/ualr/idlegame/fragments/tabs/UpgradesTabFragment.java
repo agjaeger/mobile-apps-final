@@ -88,7 +88,7 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
                 }
             });
 
-            upgradeRowFragments.add(constructUpgradeRowFragment("100000 Coins", "bonus 2", "x2"));
+            upgradeRowFragments.add(constructUpgradeRowFragment("100000 Coins", "bonus2", "x2"));
             ft.add(linearLayout.getId(), upgradeRowFragments.get(upgradeRowFragments.size() - 1), "Upgrade 2");
 
             ft.commit();
