@@ -79,9 +79,11 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
     }
 
     public void tryUnlockAll (Integer totalPowerEarned) {
-        for (UnlockableActionRowFragment arf  : viewHolder.actionRowFragments) {
-            if (totalPowerEarned >= arf.getCost()) {
-                arf.enablePurchaseButton();
+        if (viewHolder != null) {
+            for (UnlockableActionRowFragment arf : viewHolder.actionRowFragments) {
+                if (totalPowerEarned >= arf.getCost()) {
+                    arf.enablePurchaseButton();
+                }
             }
         }
     }

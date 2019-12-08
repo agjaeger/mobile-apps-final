@@ -72,9 +72,11 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
 
     public void tryUnlockAll (Integer totalMoneyEarned) {
-        for (UnlockableActionRowFragment arf  : viewHolder.actionRowFragments) {
-            if (totalMoneyEarned >= arf.getCost()) {
-                arf.enablePurchaseButton();
+        if (viewHolder != null) {
+            for (UnlockableActionRowFragment arf : viewHolder.actionRowFragments) {
+                if (totalMoneyEarned >= arf.getCost()) {
+                    arf.enablePurchaseButton();
+                }
             }
         }
     }

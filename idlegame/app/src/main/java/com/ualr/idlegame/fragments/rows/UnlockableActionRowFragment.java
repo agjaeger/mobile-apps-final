@@ -65,7 +65,9 @@ public class UnlockableActionRowFragment extends ActionRowFragment {
         return unlocked;
     }
     public void enablePurchaseButton () {
-        viewHolder.enablePurchaseBtn();
+        if (viewHolder != null) {
+            viewHolder.enablePurchaseBtn();
+        }
     }
 
     private class UnlockableActionRowFragmentViewHolder {
