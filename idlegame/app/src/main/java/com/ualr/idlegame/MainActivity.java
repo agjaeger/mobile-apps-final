@@ -109,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                     if (upgradesTabFragment != null) {
                         List<String> upgrades = upgradesTabFragment.getUpgrades();
                         for(int x = 0; x < upgradesTabFragment.getUpgradeSize(); x++){
-                            if (upgrades.get(x) == "Double-Time") {
+                            if (upgrades.get(x).equals("Double-Time")) {
                                 for (Object f : fragments) {
                                     ((TabFragment)f).onTick();
-                                }
+                               }
                         }
                     }
 
