@@ -20,6 +20,7 @@
         android:id="@+id/tablayout_parent"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="@+id/viewPager"
         app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,6 +30,7 @@
         android:id="@+id/resourcepane_placeholder"
         android:layout_width="216dp"
         android:layout_height="match_parent"
+        android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
