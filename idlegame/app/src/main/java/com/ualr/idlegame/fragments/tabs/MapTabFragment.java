@@ -1,7 +1,12 @@
 package com.ualr.idlegame.fragments.tabs;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,27 +62,85 @@ public class MapTabFragment extends Fragment implements TabFragment {
 
     public class MapTabFragmentViewHolder {
         private ImageView imageView;
+        private ImageView referenceImageView;
+        private int[] imageCoordsUpperLeft = new int[2];
+
+        private Bitmap reference;
+
+        private boolean unlockedNorth = false;
+        private boolean unlockedEast = false;
+        private boolean unlockedWest = false;
 
         public MapTabFragmentViewHolder(View view){
-            imageView = view.findViewById(R.id.map_placeholder);
+            imageView = view.findViewById(R.id.map);
+            referenceImageView = view.findViewById(R.id.reference_map);
+            imageView.getLocationOnScreen(imageCoordsUpperLeft);
 
-            imageView.setOnClickListener(new View.OnClickListener(){
+            reference = ((BitmapDrawable) referenceImageView.getDrawable()).getBitmap();
+
+            imageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View v){
+                public boolean onTouch(View v, MotionEvent event) {
+                    int x = (int) event.getX();
+                    int y = (int) event.getY();
 
-                    if(viewModel.getResourceValue("power") >= 100000) {
-                        setImage(R.drawable.map4);
-                    }
-                    else if (viewModel.getResourceValue("power") >= 10000) {
-                        setImage(R.drawable.map3);
-                    }
-                    else if (viewModel.getResourceValue("power") >= 1000) {
-                        setImage(R.drawable.map2);
-                   }
-            }
+                    System.out.println("IMAGE VIEW " + x + " " + y);
 
+                    return false;
+                }
             });
 
+            referenceImageView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    int x = (int) event.getX();
+                    int y = (int) event.getY();
+
+                    System.out.println("REF VIEW " + x + " " + y);
+
+                    if (x < 0) {
+                        x = 0;
+                    }
+
+                    if (x > reference.getWidth()) {
+                        x = reference.getWidth() - 1;
+                    }
+
+                    if (y < 0) {
+                        y = 0;
+                    }
+
+                    if (y > reference.getHeight()) {
+                        y = reference.getHeight() - 1;
+                    }
+
+                    int pixel = reference.getPixel(x, y);
+
+
+
+                    int colorR = Color.red(pixel);
+                    int colorG = Color.green(pixel);
+                    int colorB = Color.blue(pixel);
+
+                    System.out.println("REF COLOR " + colorR + " " + colorG + " " + colorB);
+
+                    if (colorR > 200 && !unlockedNorth && !unlockedWest && !unlockedEast) {
+                        setImage(R.drawable.map2);
+                        unlockedNorth = true;
+                    }
+
+                    if (colorB > 200 && unlockedNorth && !unlockedWest && !unlockedEast) {
+                        setImage(R.drawable.map3);
+                        unlockedWest = true;
+                    }
+
+                    if (colorG > 200 && unlockedNorth && unlockedWest && !unlockedEast) {
+                        setImage(R.drawable.map4);
+                        unlockedEast = true;
+                    }
+                    return false;
+                }
+            });
         }
 
         public void setImage(int imageID) {

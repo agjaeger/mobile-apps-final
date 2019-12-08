@@ -127,7 +127,6 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
             ahf.setArguments(bundle);
 
             return ahf;
-
         }
 
         private PurchaseableActionRowFragment constructActionRowFragment (String[] rowInfo) {
