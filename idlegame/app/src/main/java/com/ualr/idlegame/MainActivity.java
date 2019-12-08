@@ -17,6 +17,7 @@ import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
+import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
 import com.ualr.idlegame.tasks.CounterTask;
 import com.ualr.idlegame.tasks.UpgradeTask;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
@@ -60,9 +61,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         speedUpgradeThread.onUpgradeListener = new UpgradeTask.OnUpgradeListener() {
             @Override
             public void onUpgrade() {
-                Fragment fragment = tabFragmentPager.getItem(2);
-
-
+                UpgradesTabFragment fragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
+                if (fragment != null) {
+                    fragment.getUpgrades();
+                    System.out.println("Hit");
+                }
+                ;
             }
         };
 
