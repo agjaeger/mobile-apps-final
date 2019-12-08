@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.tasks.UpgradeTask;
 
 public class UpgradeRowFragment extends Fragment {
 
