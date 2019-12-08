@@ -57,7 +57,6 @@ public class MapTabFragment extends Fragment implements TabFragment {
 
     public class MapTabFragmentViewHolder {
         private ImageView imageView;
-        private Button button;
 
         public MapTabFragmentViewHolder(View view){
             imageView = view.findViewById(R.id.map_placeholder);
