@@ -20,7 +20,10 @@ public class ActionRowFragment extends Fragment {
     private ActionRowFragmentViewHolder viewHolder;
 
     private int increment;
+    private int maxProgress;
     private String resource;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

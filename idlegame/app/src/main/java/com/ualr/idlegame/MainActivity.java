@@ -17,6 +17,7 @@ import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.tasks.CounterTask;
+import com.ualr.idlegame.tasks.UpgradeTask;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import com.snappydb.SnappydbException;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private CounterTask bgTickThread = new CounterTask();
     private CounterTask bgAutosaveThread = new CounterTask();
     private CounterTask bgResourceDisplayUpdateThread = new CounterTask();
+
+    private UpgradeTask speedUpgradeThread = new UpgradeTask();
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -50,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 }
             }
         };
+
+        speedUpgradeThread.onUpgradeListener = new UpgradeTask.OnUpgradeListener() {
+            @Override
+            public void onUpgrade() {
+                
+            }
+        };
+
         bgTickThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10);
 
         // launch autosave thread
