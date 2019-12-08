@@ -60,7 +60,10 @@ public class UnlockableActionRowFragment extends ActionRowFragment {
             rightActionButtons.setVisibility(View.VISIBLE);
 
             progressBar = view.findViewById(R.id.progress_bar);
+            progressBar.setVisibility(View.INVISIBLE);
+
             purchaseButton = view.findViewById(R.id.purchase_btn);
+            purchaseButton.setVisibility(View.VISIBLE);
             purchaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

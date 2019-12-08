@@ -124,6 +124,25 @@
     </string-array>
 
 
+    <integer name="upgrades_num_rows">2</integer>
+    <integer name="upgrades_header_left_idx">0</integer>
+    <integer name="upgrades_header_center_idx">1</integer>
+
+    <string-array name="upgrades_header">
+        <item>Money Req</item>
+        <item>Upgrade</item>
+    </string-array>
+
+    <string-array name="upgrades_row_0">
+        <item>100</item>
+        <item>Double Time</item>
+    </string-array>
+
+    <string-array name="upgrades_row_1">
+        <item>100000</item>
+        <item>bonus 2</item>
+    </string-array>
+
     <!-- ==================================================  -->
     <!--                RAW STRINGS                          -->
     <!-- ==================================================  -->

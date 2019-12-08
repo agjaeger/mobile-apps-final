@@ -33,6 +33,18 @@ public class ActionRowFragment extends Fragment {
         viewHolder.rightTextLabel.setText(getArguments().getString("rightLabel"));
     }
 
+    public String getLeftTextLabel () {
+        return viewHolder.leftTextLabel.getText().toString();
+    }
+
+    public String getCenterTextLabel () {
+        return viewHolder.centerTextLabel.getText().toString();
+    }
+
+    public String getRightTextLabel () {
+        return viewHolder.rightTextLabel.getText().toString();
+    }
+
     private class ActionRowFragmentViewHolder {
         public TextView leftTextLabel;
         public TextView centerTextLabel;

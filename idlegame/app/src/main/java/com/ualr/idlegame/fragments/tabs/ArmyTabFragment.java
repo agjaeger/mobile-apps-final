@@ -90,7 +90,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
             ft.replace(
-                R.id.header_placeholder,
+                R.id.army_header_placeholder,
                 constructActionHeaderFragment(resources.getStringArray(R.array.army_header)),
                 getRandomKey()
             );
@@ -107,6 +107,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
                 actionRowFragments.add(arf);
                 ft.add(linearLayout.getId(), arf, getRandomKey());
             }
+
             ft.commit();
         }
 
