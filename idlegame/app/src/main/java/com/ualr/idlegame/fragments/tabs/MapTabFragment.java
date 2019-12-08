@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -56,8 +57,6 @@ public class MapTabFragment extends Fragment implements TabFragment {
 
     public class MapTabFragmentViewHolder {
         private ImageView imageView;
-        private LinearLayout customButton;
-        private ImageView blankSpace;
 
         public MapTabFragmentViewHolder(View view){
             imageView = view.findViewById(R.id.map_placeholder);

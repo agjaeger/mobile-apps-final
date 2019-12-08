@@ -10,8 +10,21 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.ualr.idlegame.R;
+import com.ualr.idlegame.tasks.UpgradeTask;
 
 public class UpgradeRowFragment extends Fragment {
+
+    public UpgradeRowFragment.OnUpgradeListener mOnUpgradeListener;
+
+    public interface OnUpgradeListener{
+        void onUpgrade(String upgrade);
+    }
+
+    public void setOnUpgradeListener(UpgradeRowFragment.OnUpgradeListener upgradeListener){
+        mOnUpgradeListener = upgradeListener;
+
+    }
+
     private UpgradeRowFragmentViewHolder viewHolder;
 
     public UpgradeRowFragment(){}
@@ -52,6 +65,7 @@ public class UpgradeRowFragment extends Fragment {
                     hidePurchaseButton();
                     disablePurchaseButton();
                     showPurchaseTextLabel();
+                    mOnUpgradeListener.onUpgrade(nameTextLabel.toString());
                 }
             });
 
