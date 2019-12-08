@@ -1,12 +1,22 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="android:background">#FFF5F5F5</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:background">@color/colorSecondary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <!-- Hide Action bar -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Button.Theme" parent="TextAppearance.AppCompat.Button">
+        <item name="android:colorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorAccent</item>
+
     </style>
 
 </resources>
