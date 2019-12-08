@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import com.ualr.idlegame.db.DatabaseManager;
+import com.ualr.idlegame.fragments.CongratsFragment;
 import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private ResourcesPaneFragment resourcesPane;
 
     private AppDataViewModel viewModel;
+    private boolean checkGameFinished = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,13 +162,24 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 );
 
                 ((ArmyTabFragment) tabFragmentPager.getItem(1)).tryUnlockAll(
-                        viewModel.getResourceValue(getResources().getString(R.string.power_resource))
+                    viewModel.getResourceValue(getResources().getString(R.string.power_resource))
                 );
 
                 ((MapTabFragment) tabFragmentPager.getItem(3)).tryUnlockAll(
-                        viewModel.getResourceValue(getResources().getString(R.string.power_resource))
+                    viewModel.getResourceValue(getResources().getString(R.string.power_resource))
                 );
 
+
+                if (checkGameFinished) {
+                    if (((MapTabFragment) tabFragmentPager.getItem(3)).allUnlocked()) {
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.activityRoot, new CongratsFragment());
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
+                        checkGameFinished = false;
+                    }
+                }
             }
         };
         bgResourceUpdateThread.executeOnExecutor(

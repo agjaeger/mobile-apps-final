@@ -74,8 +74,24 @@ public class MapTabFragment extends Fragment implements TabFragment {
     }
 
     public void tryUnlockAll (int powerEarned) {
-        for (Map.Entry<String, NationCardViewHolder> nation : viewHolder.nations.entrySet()) {
-            unlockableNations.put(nation.getKey(), powerEarned > nation.getValue().cost);
+        if (viewHolder != null) {
+            for (Map.Entry<String, NationCardViewHolder> nation : viewHolder.nations.entrySet()) {
+                unlockableNations.put(nation.getKey(), powerEarned > nation.getValue().cost);
+            }
+        }
+    }
+
+    public Boolean allUnlocked () {
+        if (viewHolder == null) {
+            return false;
+        } else {
+            boolean all = true;
+
+            for (Map.Entry<String, NationCardViewHolder> nation : viewHolder.nations.entrySet()) {
+                all = all && unlockedNations.get(nation.getKey());
+            }
+
+            return all;
         }
     }
 

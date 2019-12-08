@@ -180,6 +180,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
             ActionRowFragment ahf = new ActionRowFragment();
             ahf.setArguments(bundle);
+            ahf.setBottomBorder();
 
             return ahf;
         }
