@@ -3,6 +3,7 @@ package com.ualr.idlegame.fragments.tabs;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,7 +64,6 @@ public class MapTabFragment extends Fragment implements TabFragment {
     public class MapTabFragmentViewHolder {
         private ImageView imageView;
         private ImageView referenceImageView;
-        private int[] imageCoordsUpperLeft = new int[2];
 
         private Bitmap reference;
 
@@ -74,7 +74,7 @@ public class MapTabFragment extends Fragment implements TabFragment {
         public MapTabFragmentViewHolder(View view){
             imageView = view.findViewById(R.id.map);
             referenceImageView = view.findViewById(R.id.reference_map);
-            imageView.getLocationOnScreen(imageCoordsUpperLeft);
+            referenceImageView.setVisibility(View.INVISIBLE);
 
             reference = ((BitmapDrawable) referenceImageView.getDrawable()).getBitmap();
 
@@ -83,40 +83,29 @@ public class MapTabFragment extends Fragment implements TabFragment {
                 public boolean onTouch(View v, MotionEvent event) {
                     int x = (int) event.getX();
                     int y = (int) event.getY();
+                    float[] eventXY = new float[] {x, y};
 
-                    System.out.println("IMAGE VIEW " + x + " " + y);
+                    Matrix invertMatrix =
+                    ((ImageView)imageView).getImageMatrix();
 
-                    return false;
-                }
-            });
+                    invertMatrix.mapPoints(eventXY);
+                    x = Integer.valueOf((int)eventXY[0]);
+                    y = Integer.valueOf((int)eventXY[1]);
 
-            referenceImageView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    int x = (int) event.getX();
-                    int y = (int) event.getY();
-
-                    System.out.println("REF VIEW " + x + " " + y);
 
                     if (x < 0) {
                         x = 0;
-                    }
-
-                    if (x > reference.getWidth()) {
+                    } else if (x > reference.getWidth()) {
                         x = reference.getWidth() - 1;
                     }
 
                     if (y < 0) {
                         y = 0;
-                    }
-
-                    if (y > reference.getHeight()) {
+                    } else if (y > reference.getHeight()) {
                         y = reference.getHeight() - 1;
                     }
 
                     int pixel = reference.getPixel(x, y);
-
-
 
                     int colorR = Color.red(pixel);
                     int colorG = Color.green(pixel);
