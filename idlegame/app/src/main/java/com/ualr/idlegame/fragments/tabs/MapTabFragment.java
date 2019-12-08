@@ -79,6 +79,20 @@ public class MapTabFragment extends Fragment implements TabFragment {
         }
     }
 
+    public Boolean allUnlocked () {
+        if (viewHolder == null) {
+            return false;
+        } else {
+            boolean all = true;
+
+            for (Map.Entry<String, NationCardViewHolder> nation : viewHolder.nations.entrySet()) {
+                all = all && unlockedNations.get(nation.getKey());
+            }
+
+            return all;
+        }
+    }
+
     private class NationCardViewHolder {
         public TextView titleTextView;
         public TextView powerValueTextView;
