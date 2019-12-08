@@ -20,7 +20,7 @@
         <item>@string/footmen</item>
         <item>@string/minutemen</item>
         <item>@string/artillery</item>
-        <item>@string/calvery</item>
+        <item>@string/cavalry</item>
         <item>@string/kakarot</item>
     </string-array>
 
@@ -67,7 +67,7 @@
     <string-array name="recruit_row_3">
         <item>1500</item>
         <item>Celebrity Endorsement</item>
-        <item>@string/calvery</item>
+        <item>@string/cavalry</item>
         <item>1000</item>
     </string-array>
 
@@ -135,7 +135,7 @@
     <string name="footmen" id="footmen_str">footmen</string>
     <string name="minutemen" id="minutemen_str">minutemen</string>
     <string name="artillery" id="artillery_str">artillery</string>
-    <string name="calvery" id="calvery_str">calvery</string>
+    <string name="cavalry" id="cavalry_str">cavalry</string>
     <string name="kakarot" id="kakarot_str">kakarot</string>
 
 

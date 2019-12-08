@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         viewModel.registerResource("footmen");
         viewModel.registerResource("minutemen");
         viewModel.registerResource("artillery");
-        viewModel.registerResource("calvery");
+        viewModel.registerResource("cavalry");
         viewModel.registerResource("kakarot");
 
         // restore data from database
