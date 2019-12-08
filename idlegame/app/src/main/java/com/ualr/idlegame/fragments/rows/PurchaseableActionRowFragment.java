@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 public class PurchaseableActionRowFragment extends ActionRowFragment {
     private PurchaseableActionRowFragmentViewHolder viewHolder;
     private boolean purchased;
+    private int m_cost;
 
     public OnPurchaseListener onPurchaseListener;
     public interface OnPurchaseListener {
@@ -29,6 +30,17 @@ public class PurchaseableActionRowFragment extends ActionRowFragment {
         return view;
     }
 
+    public void setCost (int cost) {
+        m_cost = cost;
+    }
+
+    public int getCost () {
+        return m_cost;
+    }
+
+    public void enablePurchaseButton () {
+        viewHolder.enablePurchaseBtn();
+    }
 
     private class PurchaseableActionRowFragmentViewHolder {
         public Button purchaseButton;
@@ -39,17 +51,18 @@ public class PurchaseableActionRowFragment extends ActionRowFragment {
             rightActionButtons.setVisibility(View.VISIBLE);
 
             purchaseLabel = view.findViewById(R.id.purchased_label);
-
             purchaseButton = view.findViewById(R.id.purchase_btn);
-            purchaseButton.setVisibility(View.VISIBLE);
+
+            showPurchaseBtn();
+            hidePurchaseLabel();
 
             purchaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     purchased = true;
 
-                    purchaseButton.setVisibility(View.INVISIBLE);
-                    purchaseLabel.setVisibility(View.VISIBLE);
+                    hidePurchaseBtn();
+                    showPurchaseLabel();
 
                     onPurchaseListener.onPurchase(PurchaseableActionRowFragment.super.getCenterTextLabel());
                 }
@@ -57,6 +70,31 @@ public class PurchaseableActionRowFragment extends ActionRowFragment {
 
             // setup initial state
             purchased = false;
+            disablePurchaseBtn();
         }
+
+        private void hidePurchaseBtn () {
+            purchaseButton.setVisibility(View.INVISIBLE);
+        }
+        private void showPurchaseBtn () {
+            purchaseButton.setVisibility(View.VISIBLE);
+        }
+
+        private void hidePurchaseLabel () {
+            purchaseLabel.setVisibility(View.INVISIBLE);
+        }
+        private void showPurchaseLabel () {
+            purchaseLabel.setVisibility(View.VISIBLE);
+        }
+
+
+        public void disablePurchaseBtn () {
+            purchaseButton.setEnabled(false);
+        }
+
+        public void enablePurchaseBtn () {
+            purchaseButton.setEnabled(true);
+        }
+
     }
 }

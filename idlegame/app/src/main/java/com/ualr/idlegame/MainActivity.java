@@ -16,6 +16,8 @@ import com.ualr.idlegame.db.DatabaseManager;
 import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
+import com.ualr.idlegame.fragments.tabs.ArmyTabFragment;
+import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
 import com.ualr.idlegame.tasks.CounterTask;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private CounterTask bgTickThread = new CounterTask();
     private CounterTask bgAutosaveThread = new CounterTask();
-    private CounterTask bgResourceDisplayUpdateThread = new CounterTask();
+    private CounterTask bgResourceUpdateThread = new CounterTask();
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -115,9 +117,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                                }
                         }
                     }
-
                 }
-
             }
         };
         bgTickThread.executeOnExecutor(
@@ -148,14 +148,23 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         // -----------------------------------------------------------------------------------------
         // launch thread to periodically update the resource pane
-        bgResourceDisplayUpdateThread.onCountListener = new CounterTask.OnCountListener() {
+        bgResourceUpdateThread.onCountListener = new CounterTask.OnCountListener() {
             @Override
             public void onCount () {
                 resourcesPane.update();
 
+                // unlock upgrades
+                ((RecruitTabFragment) tabFragmentPager.getItem(0)).tryUnlockAll(
+                    viewModel.getResourceValue(getResources().getString(R.string.money_resource))
+                );
+
+                ((ArmyTabFragment) tabFragmentPager.getItem(1)).tryUnlockAll(
+                        viewModel.getResourceValue(getResources().getString(R.string.power_resource))
+                );
+
             }
         };
-        bgResourceDisplayUpdateThread.executeOnExecutor(
+        bgResourceUpdateThread.executeOnExecutor(
             AsyncTask.THREAD_POOL_EXECUTOR,
             getResources().getInteger(R.integer.bg_resource_update_time_ms)
         );

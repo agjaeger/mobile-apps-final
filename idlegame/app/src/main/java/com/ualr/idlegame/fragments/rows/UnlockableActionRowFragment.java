@@ -29,6 +29,7 @@ public class UnlockableActionRowFragment extends ActionRowFragment {
     private int increment;
     private String resource;
     private boolean unlocked;
+    private int m_cost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,16 +51,21 @@ public class UnlockableActionRowFragment extends ActionRowFragment {
         }
     }
 
-    public Boolean unlocked () {
-        return unlocked;
-    }
-
     public void setIncrement (int p_increment) {
         increment = p_increment;
     }
-
     public void setResource (String p_resource) {
         resource = p_resource;
+    }
+
+    public void setCost (int cost) { m_cost = cost;}
+    public int getCost () { return m_cost; }
+
+    public Boolean unlocked () {
+        return unlocked;
+    }
+    public void enablePurchaseButton () {
+        viewHolder.enablePurchaseBtn();
     }
 
     private class UnlockableActionRowFragmentViewHolder {
@@ -71,31 +77,45 @@ public class UnlockableActionRowFragment extends ActionRowFragment {
             rightActionButtons.setVisibility(View.VISIBLE);
 
             progressBar = view.findViewById(R.id.progress_bar);
-            progressBar.setVisibility(View.INVISIBLE);
-
             purchaseButton = view.findViewById(R.id.purchase_btn);
-            purchaseButton.setVisibility(View.VISIBLE);
+
+            hideProgressBar();
+            showPurchaseBtn ();
+
             purchaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     unlocked = true;
 
                     progressBar.setProgress(0);
-                    hidePurchaseButton();
+                    hidePurchaseBtn();
                     showProgressBar();
                 }
             });
 
             // setup initial state
             unlocked = false;
-            //disablePurchaseButton();
+            disablePurchaseBtn();
             hideProgressBar();
         }
 
         private void hideProgressBar () { progressBar.setVisibility(View.INVISIBLE); }
         private void showProgressBar () { progressBar.setVisibility(View.VISIBLE); }
 
-        private void hidePurchaseButton () { purchaseButton.setVisibility(View.INVISIBLE); }
+        private void hidePurchaseBtn () {
+            purchaseButton.setVisibility(View.INVISIBLE);
+        }
 
+        private void showPurchaseBtn () {
+            purchaseButton.setVisibility(View.VISIBLE);
+        }
+
+        private void disablePurchaseBtn () {
+            purchaseButton.setEnabled(false);
+        }
+
+        private void enablePurchaseBtn () {
+            purchaseButton.setEnabled(true);
+        }
     }
 }

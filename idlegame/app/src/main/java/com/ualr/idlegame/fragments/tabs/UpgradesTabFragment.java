@@ -76,10 +76,18 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
     public int getUpgradeSize () {return upgrades.size();}
 
 
-    public class UpgradesTabFragmentViewHolder {
+    public void tryUnlockAll (Integer totalMoneyEarned) {
+        for (PurchaseableActionRowFragment arf  : viewHolder.upgradeRowFragments) {
+            if (totalMoneyEarned >= arf.getCost()) {
+                arf.enablePurchaseButton();
+            }
+        }
+    }
+
+    private class UpgradesTabFragmentViewHolder {
         private LinearLayout linearLayout;
 
-        private List<PurchaseableActionRowFragment> upgradeRowFragments = new ArrayList();
+        public List<PurchaseableActionRowFragment> upgradeRowFragments = new ArrayList();
 
 
         public UpgradesTabFragmentViewHolder(View view){
@@ -142,6 +150,7 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
 
             PurchaseableActionRowFragment arf = new PurchaseableActionRowFragment();
             arf.setArguments(bundle);
+            arf.setCost(Integer.parseInt(actionCost));
 
             return arf;
         }

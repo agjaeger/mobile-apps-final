@@ -78,9 +78,17 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
         mActive = false;
     }
 
+    public void tryUnlockAll (Integer totalPowerEarned) {
+        for (UnlockableActionRowFragment arf  : viewHolder.actionRowFragments) {
+            if (totalPowerEarned >= arf.getCost()) {
+                arf.enablePurchaseButton();
+            }
+        }
+    }
+
     public class ArmyTabFragmentViewHolder implements ProgressViewHolder {
         private LinearLayout linearLayout;
-        private List<UnlockableActionRowFragment> actionRowFragments = new ArrayList();
+        public List<UnlockableActionRowFragment> actionRowFragments = new ArrayList();
         public OnProgressViewHolder onProgressViewHolderListener;
 
 
@@ -147,6 +155,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
             // setup increment amount
             arf.setIncrement(Integer.parseInt(actionReward));
             arf.setResource("money");
+            arf.setCost(Integer.parseInt(actionCost));
 
             // setup callback for when the progress bar completes.
             arf.onProgressViewHolder = new OnProgressViewHolder() {

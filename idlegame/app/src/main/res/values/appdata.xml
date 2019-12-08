@@ -8,8 +8,8 @@
     </string-array>
 
     <string-array name="resource_names">
-        <item>power</item>
-        <item>money</item>
+        <item>@string/power_resource</item>
+        <item>@string/money_resource</item>
     </string-array>
 
     <string-array name="army_units">
@@ -147,6 +147,9 @@
     <!--                RAW STRINGS                          -->
     <!-- ==================================================  -->
 
+    <string name="power_resource">power</string>
+    <string name="money_resource">money</string>
+
     <string name="footmen" id="footmen_str">footmen</string>
     <string name="minutemen" id="minutemen_str">minutemen</string>
     <string name="artillery" id="artillery_str">artillery</string>
@@ -159,8 +162,8 @@
     <!-- ==================================================  -->
     <integer name="default_active_tab">0</integer>
     <integer name="bg_tick_time_ms">10</integer>
-    <integer name="bg_autosave_time_ms">10000</integer>
-    <integer name="bg_resource_update_time_ms">200</integer>
+    <integer name="bg_autosave_time_ms">25000</integer>
+    <integer name="bg_resource_update_time_ms">100</integer>
 
 
 
