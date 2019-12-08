@@ -64,7 +64,7 @@ public class UpgradeRowFragment extends Fragment {
                     hidePurchaseButton();
                     disablePurchaseButton();
                     showPurchaseTextLabel();
-                    mOnUpgradeListener.onUpgrade(nameTextLabel.toString());
+                    mOnUpgradeListener.onUpgrade(nameTextLabel.getText().toString());
                 }
             });
 
