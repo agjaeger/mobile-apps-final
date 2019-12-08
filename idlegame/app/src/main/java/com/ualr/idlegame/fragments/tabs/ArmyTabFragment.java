@@ -104,7 +104,17 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
                 );
 
                 UnlockableActionRowFragment arf = constructActionRowFragment(resources.getStringArray(rowAndroidID));
+
+                arf.setOnPowerUpListener(new UnlockableActionRowFragment.OnPowerUpListener(){
+                    @Override
+                    public void onPowerUp (){
+                        System.out.println("Hit");
+                    };
+                });
+
+
                 actionRowFragments.add(arf);
+
                 ft.add(linearLayout.getId(), arf, getRandomKey());
             }
             ft.commit();

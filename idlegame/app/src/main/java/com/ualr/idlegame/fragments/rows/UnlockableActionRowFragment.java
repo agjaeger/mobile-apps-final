@@ -11,6 +11,17 @@ import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
 
 public class UnlockableActionRowFragment extends ActionRowFragment {
+
+    public UnlockableActionRowFragment.OnPowerUpListener mOnPowerUpListener;
+
+    public interface OnPowerUpListener{
+        void onPowerUp();
+    }
+
+    public void setOnPowerUpListener(UnlockableActionRowFragment.OnPowerUpListener powerUpListener){
+        mOnPowerUpListener = powerUpListener;
+    }
+
     public OnProgressViewHolder onProgressViewHolder;
 
     private UnlockableActionRowFragmentViewHolder viewHolder;
