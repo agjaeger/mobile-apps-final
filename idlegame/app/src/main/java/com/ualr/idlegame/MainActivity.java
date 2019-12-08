@@ -104,6 +104,20 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 for (Object f : fragments) {
                     ((TabFragment)f).onTick();
                 }
+
+                UpgradesTabFragment upgradesTabFragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
+                    if (upgradesTabFragment != null) {
+                        List<String> upgrades = upgradesTabFragment.getUpgrades();
+                        for(int x = 0; x < upgradesTabFragment.getUpgradeSize(); x++){
+                            if (upgrades.get(x) == "Double-Time") {
+                                for (Object f : fragments) {
+                                    ((TabFragment)f).onTick();
+                                }
+                        }
+                    }
+
+                }
+
             }
         };
         bgTickThread.executeOnExecutor(
@@ -139,15 +153,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             public void onCount () {
                 resourcesPane.update();
 
-                UpgradesTabFragment fragment = (UpgradesTabFragment) tabFragmentPager.getItem(2);
-                if (fragment != null) {
-                    List<String> upgrades = fragment.getUpgrades();
-                    for(int x = 0; x < fragment.getUpgradeSize(); x++){
-                        //    if (upgrades.get(x) == "Double-Time")
-                        System.out.println(fragment.getUpgrades());
-                    }
-
-                }
             }
         };
         bgResourceDisplayUpdateThread.executeOnExecutor(

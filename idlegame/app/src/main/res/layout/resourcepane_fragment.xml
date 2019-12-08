@@ -72,12 +72,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/minutemen_label" />
 
             <TextView
-                android:id="@+id/calvery_label"
+                android:id="@+id/cavalry_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="Calvery"
+                android:text="Cavalry"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
                 app:layout_constraintTop_toBottomOf="@+id/artillery_label" />
 
@@ -89,7 +89,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Kakarot"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/calvery_label" />
+                app:layout_constraintTop_toBottomOf="@+id/cavalry_label" />
 
             <TextView
                 android:id="@+id/footmen_value"
@@ -122,7 +122,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/minutemen_value" />
 
             <TextView
-                android:id="@+id/calvery_value"
+                android:id="@+id/cavalry_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -139,7 +139,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calvery_value" />
+                app:layout_constraintTop_toBottomOf="@+id/cavalry_value" />
 
             <TextView
                 android:id="@+id/resources_label"

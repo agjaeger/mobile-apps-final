@@ -35,7 +35,7 @@ public class ResourcesPaneFragment extends Fragment {
         viewHolder.footmenValue.setText(viewModel.getResourceValue("footmen").toString());
         viewHolder.minutemenValue.setText(viewModel.getResourceValue("minutemen").toString());
         viewHolder.artilleryValue.setText(viewModel.getResourceValue("artillery").toString());
-        viewHolder.calveryValue.setText(viewModel.getResourceValue("calvery").toString());
+        viewHolder.cavalryValue.setText(viewModel.getResourceValue("cavalry").toString());
         viewHolder.kakarotValue.setText(viewModel.getResourceValue("kakarot").toString());
     }
 
@@ -47,7 +47,7 @@ public class ResourcesPaneFragment extends Fragment {
         public TextView footmenValue;
         public TextView minutemenValue;
         public TextView artilleryValue;
-        public TextView calveryValue;
+        public TextView cavalryValue;
         public TextView kakarotValue;
 
 
@@ -58,7 +58,7 @@ public class ResourcesPaneFragment extends Fragment {
             footmenValue = view.findViewById(R.id.footmen_value);
             minutemenValue = view.findViewById(R.id.minutemen_value);
             artilleryValue = view.findViewById(R.id.artillery_value);
-            calveryValue = view.findViewById(R.id.calvery_value);
+            cavalryValue = view.findViewById(R.id.cavalry_value);
             kakarotValue = view.findViewById(R.id.kakarot_value);
         }
     }
