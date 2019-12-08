@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,11 +13,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.fragments.ActionHeaderFragment;
-import com.ualr.idlegame.fragments.ActionRowFragment;
+import com.ualr.idlegame.fragments.rows.ActionRowFragment;
 import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
 import com.ualr.idlegame.fragments.interfaces.ProgressViewHolder;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
+import com.ualr.idlegame.fragments.rows.UnlockableActionRowFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import java.nio.charset.Charset;
@@ -46,8 +45,6 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
 
-
-
         return view;
     }
 
@@ -73,12 +70,11 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
         mActive = false;
     }
 
-    public class RecruitTabFragmentViewHolder implements ProgressViewHolder {
+    private class RecruitTabFragmentViewHolder implements ProgressViewHolder {
         private LinearLayout linearLayout;
 
-        private List<ActionRowFragment> actionRowFragments = new ArrayList();
+        private List<UnlockableActionRowFragment> actionRowFragments = new ArrayList();
         public OnProgressViewHolder onProgressViewHolderListener;
-
 
         public RecruitTabFragmentViewHolder (View view) {
             linearLayout = view.findViewById(R.id.linear_layout);
@@ -87,9 +83,9 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             // Generate Action Header Fragment
             ft.replace(
-                    R.id.header_placeholder,
-                    constructActionHeaderFragment(resources.getStringArray(R.array.recruit_header)),
-                    getRandomKey()
+                R.id.header_placeholder,
+                constructActionHeaderFragment(resources.getStringArray(R.array.recruit_header)),
+                getRandomKey()
             );
 
             // Generate Action Row Fragments
@@ -100,7 +96,7 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
                         "array", context.getPackageName()
                 );
 
-                ActionRowFragment arf = constructActionRowFragment(resources.getStringArray(rowAndroidID));
+                UnlockableActionRowFragment arf = constructActionRowFragment(resources.getStringArray(rowAndroidID));
                 actionRowFragments.add(arf);
                 ft.add(linearLayout.getId(), arf, getRandomKey());
             }
@@ -110,14 +106,14 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
         @Override
         public void incrementProgress () {
-            for (ActionRowFragment arf  : actionRowFragments) {
-                if (arf.purchased()) {
+            for (UnlockableActionRowFragment arf  : actionRowFragments) {
+                if (arf.unlocked()) {
                     arf.incrementProgressBar();
                 }
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String[] rowInfo) {
+        private UnlockableActionRowFragment constructActionRowFragment (String[] rowInfo) {
             String actionCost = rowInfo[resources.getInteger(R.integer.recruit_row_cost_idx)];
             String actionTitle = rowInfo[resources.getInteger(R.integer.recruit_row_title_idx)];
             String actionReward = "+" + rowInfo[resources.getInteger(R.integer.recruit_row_earned_power_value_idx)];
@@ -125,11 +121,11 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             // Bundle up the data
             Bundle bundle = new Bundle();
-            bundle.putString("costLabel", actionCost);
-            bundle.putString("typeLabel", actionTitle);
-            bundle.putString("valueLabel", actionReward);
+            bundle.putString("leftLabel", actionCost);
+            bundle.putString("centerLabel", actionTitle);
+            bundle.putString("rightLabel", actionReward);
 
-            ActionRowFragment arf = new ActionRowFragment();
+            UnlockableActionRowFragment arf = new UnlockableActionRowFragment();
             arf.setArguments(bundle);
 
             // setup increment amount
@@ -149,20 +145,14 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             return arf;
         }
 
-        private ActionHeaderFragment constructActionHeaderFragment (String[] headerInfo) {
-            ActionHeaderFragment ahf = new ActionHeaderFragment();
+        private ActionRowFragment constructActionHeaderFragment (String[] headerInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putString("leftLabel", headerInfo[resources.getInteger(R.integer.recruit_header_left_idx)]);
+            bundle.putString("centerLabel", headerInfo[resources.getInteger(R.integer.recruit_header_center_idx)]);
+            bundle.putString("rightLabel", headerInfo[resources.getInteger(R.integer.recruit_header_right_idx)]);
 
-            ahf.setLeftTextView(
-                headerInfo[resources.getInteger(R.integer.recruit_header_left_idx)]
-            );
-
-            ahf.setCenterTextView(
-                headerInfo[resources.getInteger(R.integer.recruit_header_center_idx)]
-            );
-
-            ahf.setRightTextView(
-                headerInfo[resources.getInteger(R.integer.recruit_header_right_idx)]
-            );
+            ActionRowFragment ahf = new ActionRowFragment();
+            ahf.setArguments(bundle);
 
             return ahf;
         }

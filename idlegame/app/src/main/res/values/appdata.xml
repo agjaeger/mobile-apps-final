@@ -78,6 +78,56 @@
         <item>9001</item>
     </string-array>
 
+
+
+
+    <integer name="army_header_left_idx">0</integer>
+    <integer name="army_header_center_idx">1</integer>
+    <integer name="army_header_right_idx">2</integer>
+
+    <string-array name="army_header">
+        <item>Power Req</item>
+        <item>Action</item>
+        <item>Money Gained</item>
+    </string-array>
+
+
+    <integer name="army_num_rows">5</integer>
+    <integer name="army_row_cost_idx">0</integer>
+    <integer name="army_row_title_idx">1</integer>
+    <integer name="army_row_money_earned_idx">2</integer>
+
+    <string-array name="army_row_0">
+        <item>10</item>
+        <item>Dig Ditches</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="army_row_1">
+        <item>10</item>
+        <item>Dig Ditches</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="army_row_2">
+        <item>10</item>
+        <item>Dig Ditches</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="army_row_3">
+        <item>10</item>
+        <item>Dig Ditches</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="army_row_4">
+        <item>10</item>
+        <item>Dig Ditches</item>
+        <item>1</item>
+    </string-array>
+
+
     <!-- ==================================================  -->
     <!--                RAW STRINGS                          -->
     <!-- ==================================================  -->
@@ -95,7 +145,7 @@
     <integer name="default_active_tab">0</integer>
     <integer name="bg_tick_time_ms">10</integer>
     <integer name="bg_autosave_time_ms">10000</integer>
-    <integer name="bg_resource_update_time_ms">1000</integer>
+    <integer name="bg_resource_update_time_ms">200</integer>
 
 
 

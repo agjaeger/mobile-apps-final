@@ -1,5 +1,7 @@
 package com.ualr.idlegame.fragments.tabs;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +13,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.fragments.ActionHeaderFragment;
-import com.ualr.idlegame.fragments.ActionRowFragment;
+import com.ualr.idlegame.fragments.rows.ActionRowFragment;
 import com.ualr.idlegame.fragments.interfaces.OnProgressViewHolder;
 import com.ualr.idlegame.fragments.interfaces.ProgressViewHolder;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
+import com.ualr.idlegame.fragments.rows.UnlockableActionRowFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
 import java.nio.charset.Charset;
@@ -25,12 +27,18 @@ import java.util.Random;
 
 
 public class ArmyTabFragment extends Fragment implements TabFragment {
+    private Context context = null;
+    private Resources resources = null;
+
     private boolean mActive = false;
     private ArmyTabFragmentViewHolder viewHolder;
     private AppDataViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getContext();
+        resources = context.getResources();
+
         View view = inflater.inflate(R.layout.tab_army_fragment, container, false);
         viewHolder = new ArmyTabFragmentViewHolder(view);
         // setup callback for when the progress bar completes.
@@ -72,8 +80,7 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
     public class ArmyTabFragmentViewHolder implements ProgressViewHolder {
         private LinearLayout linearLayout;
-
-        private List<ActionRowFragment> actionRowFragments = new ArrayList();
+        private List<UnlockableActionRowFragment> actionRowFragments = new ArrayList();
         public OnProgressViewHolder onProgressViewHolderListener;
 
 
@@ -82,71 +89,75 @@ public class ArmyTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            ft.replace(R.id.army_header_placeholder, constructActionHeaderFragment(), getRandomKey());
+            ft.replace(
+                R.id.header_placeholder,
+                constructActionHeaderFragment(resources.getStringArray(R.array.army_header)),
+                getRandomKey()
+            );
 
-            // Newspaper
-            actionRowFragments.add(constructActionRowFragment("0", "Dig Ditches", "+1", 1));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), "test");
+            // Generate Action Row Fragments
+            int armyNumRows = resources.getInteger(R.integer.army_num_rows);
+            for (int rowIdx = 0; rowIdx < armyNumRows; rowIdx++) {
+                int rowAndroidID = resources.getIdentifier(
+                        "army_row_" + rowIdx,
+                        "array", context.getPackageName()
+                );
 
-            // Town Crier
-            actionRowFragments.add(constructActionRowFragment("40", "Fortify Town", "+10", 10));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Propaganda
-            actionRowFragments.add(constructActionRowFragment("250", "Blow Their Socks Off", "+100", 100));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Celebrity
-            actionRowFragments.add(constructActionRowFragment("1500", "Illegal Horse Racing", "+1000", 1000));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Dragon balls
-            actionRowFragments.add(constructActionRowFragment("80000", "Fight Vegeta", "+9001", 9001));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
+                UnlockableActionRowFragment arf = constructActionRowFragment(resources.getStringArray(rowAndroidID));
+                actionRowFragments.add(arf);
+                ft.add(linearLayout.getId(), arf, getRandomKey());
+            }
             ft.commit();
         }
 
         @Override
         public void incrementProgress () {
-            for (ActionRowFragment arf  : actionRowFragments) {
-                if (arf.purchased()) {
+            for (UnlockableActionRowFragment arf  : actionRowFragments) {
+                if (arf.unlocked()) {
                     arf.incrementProgressBar();
                 }
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer pincrement) {
-            Bundle bundle = new Bundle();
-            bundle.putString("costLabel", costLabel);
-            bundle.putString("typeLabel", typeLabel);
-            bundle.putString("valueLabel", valueLabel);
+        private UnlockableActionRowFragment constructActionRowFragment (String[] rowInfo) {
+            String actionCost = rowInfo[resources.getInteger(R.integer.army_row_cost_idx)];
+            String actionTitle = rowInfo[resources.getInteger(R.integer.army_row_title_idx)];
+            String actionReward = "+" + rowInfo[resources.getInteger(R.integer.army_row_money_earned_idx)];
 
-            ActionRowFragment arf = new ActionRowFragment();
+            // Bundle up the data
+            Bundle bundle = new Bundle();
+            bundle.putString("leftLabel", actionCost);
+            bundle.putString("centerLabel", actionTitle);
+            bundle.putString("rightLabel", actionReward);
+
+            UnlockableActionRowFragment arf = new UnlockableActionRowFragment();
             arf.setArguments(bundle);
 
-            // setup callback for when the progress bar completes.
-            arf.setIncrement(pincrement);
+            // setup increment amount
+            arf.setIncrement(Integer.parseInt(actionReward));
             arf.setResource("money");
 
+            // setup callback for when the progress bar completes.
             arf.onProgressViewHolder = new OnProgressViewHolder() {
                 @Override
                 public void onComplete (String[] resources, int increment) {
-                    for (String resource : resources)
-                    viewModel.incrementResource(resource, increment);
+                    for (String resource : resources) {
+                        viewModel.incrementResource(resource, increment);
+                    }
                 }
             };
-
 
             return arf;
         }
 
-        private ActionHeaderFragment constructActionHeaderFragment () {
-            ActionHeaderFragment ahf = new ActionHeaderFragment();
+        private ActionRowFragment constructActionHeaderFragment (String[] headerInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putString("leftLabel", headerInfo[resources.getInteger(R.integer.army_header_left_idx)]);
+            bundle.putString("centerLabel", headerInfo[resources.getInteger(R.integer.army_header_center_idx)]);
+            bundle.putString("rightLabel", headerInfo[resources.getInteger(R.integer.army_header_right_idx)]);
 
-            ahf.setLeftTextView("Power Req");
-            ahf.setCenterTextView("Action");
-            ahf.setRightTextView("Money Gained");
+            ActionRowFragment ahf = new ActionRowFragment();
+            ahf.setArguments(bundle);
 
             return ahf;
         }

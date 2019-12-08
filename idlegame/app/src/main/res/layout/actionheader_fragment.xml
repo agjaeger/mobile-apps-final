@@ -15,7 +15,7 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="#EBEBEB"
         app:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+        app:layout_constraintEnd_toStartOf="@+id/right_action_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -57,7 +57,7 @@
     </androidx.cardview.widget.CardView>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/right_action_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"

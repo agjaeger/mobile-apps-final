@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.ualr.idlegame.R;
-import com.ualr.idlegame.fragments.ActionHeaderFragment;
 import com.ualr.idlegame.fragments.UpgradeRowFragment;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
@@ -68,7 +67,7 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-            ft.replace(R.id.upgrade_header_placeholder, new ActionHeaderFragment(), getRandomKey());
+           // ft.replace(R.id.upgrade_header_placeholder, new ActionHeaderFragment(), getRandomKey());
 
             upgradeRowFragments.add(constructUpgradeRowFragment("10", "bonus 1", "x2"));
             ft.add(linearLayout.getId(), upgradeRowFragments.get(upgradeRowFragments.size() - 1), "Upgrade 1");
