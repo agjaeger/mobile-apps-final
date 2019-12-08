@@ -39,87 +39,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // launch background thread to calculate ticks
-        bgTickThread.onCountListener = new CounterTask.OnCountListener() {
-            @Override
-            public void onCount () {
-                Object[] fragments = tabFragmentPager.getFragments();
-
-                for (Object f : fragments) {
-                    ((TabFragment)f).onTick();
-                }
-            }
-        };
-        bgTickThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10);
-
-        // launch autosave thread
-        bgAutosaveThread.onCountListener = new CounterTask.OnCountListener() {
-            @Override
-            public void onCount () {
-                Context context = getApplicationContext();
-                CharSequence text = "Autosaving!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                viewModel.saveDataToDB();
-            }
-        };
-        bgAutosaveThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 10000);
-
-        // launch thread to periodically update the resource pane
-        bgResourceDisplayUpdateThread.onCountListener = new CounterTask.OnCountListener() {
-            @Override
-            public void onCount () {
-                resourcesPane.update();
-            }
-        };
-        bgResourceDisplayUpdateThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 500);
-
-        // open the database for the application
+        // load data
         DatabaseManager.getInstance().open(getApplicationContext());
+        loadViewModel();
 
-        // get App Data View Model
-        viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
+        // launch background threads
+        launchBGThreads();
 
-        // clear old data
-        viewModel.resetData();
-
-        // register resources
-        registerResources(viewModel);
-
-        // restore data from database
-        viewModel.restoreDataFromDatabase();
-
-
-        // find tablayout view and populate with Tabs
-        tabLayout = findViewById(R.id.tablayout_parent);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Recruit"));
-        tabLayout.addTab(tabLayout.newTab().setText("Army"));
-        tabLayout.addTab(tabLayout.newTab().setText("Upgrades"));
-        tabLayout.addTab(tabLayout.newTab().setText("Map"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        // find and setup viewpager
-        viewPager = findViewById(R.id.viewPager);
-        tabFragmentPager = new TabFragmentPager (getSupportFragmentManager());
-        viewPager.setAdapter(tabFragmentPager);
-        tabLayout.addOnTabSelectedListener(this);
-
-        // View Pager will persistently store every page in the background
-        viewPager.setOffscreenPageLimit(tabLayout.getTabCount());
-
-        // set the first tab as active on startup
-        tabFragmentPager.setActive(0);
-        viewPager.setCurrentItem(0, true);
-
-        // load resources pane
-        resourcesPane = new ResourcesPaneFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.resourcepane_placeholder, resourcesPane);
-        ft.commit();
+        // initialize UI
+        setupTabs();
+        setupViewPager();
+        loadResourcePane();
     }
 
     @Override
@@ -138,14 +68,114 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     }
 
-    private void registerResources (AppDataViewModel vm) {
-        viewModel.registerResource("power");
-        viewModel.registerResource("money");
+    private void loadViewModel () {
+        // get App Data View Model
+        viewModel = ViewModelProviders.of(this).get(AppDataViewModel.class);
+
+        // clear old data
+        viewModel.resetData();
+
+        // register resources
+        String[] resourceNames = getResources().getStringArray(R.array.resource_names);
+        for (String resourceName : resourceNames) {
+            viewModel.registerResource(resourceName);
+
+        }
 
         viewModel.registerResource("footmen");
         viewModel.registerResource("minutemen");
         viewModel.registerResource("artillery");
         viewModel.registerResource("calvery");
         viewModel.registerResource("kakarot");
+
+        // restore data from database
+        viewModel.restoreDataFromDatabase();
+    }
+
+    private void launchBGThreads () {
+        // -----------------------------------------------------------------------------------------
+        // launch background thread to calculate ticks
+        bgTickThread.onCountListener = new CounterTask.OnCountListener() {
+            @Override
+            public void onCount () {
+                Object[] fragments = tabFragmentPager.getFragments();
+
+                for (Object f : fragments) {
+                    ((TabFragment)f).onTick();
+                }
+            }
+        };
+        bgTickThread.executeOnExecutor(
+                AsyncTask.THREAD_POOL_EXECUTOR,
+                getResources().getInteger(R.integer.bg_tick_time_ms)
+        );
+
+
+        // -----------------------------------------------------------------------------------------
+        // launch autosave thread
+        bgAutosaveThread.onCountListener = new CounterTask.OnCountListener() {
+            @Override
+            public void onCount () {
+                Context context = getApplicationContext();
+                CharSequence text = "Autosaving!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                viewModel.saveDataToDB();
+            }
+        };
+        bgAutosaveThread.executeOnExecutor(
+                AsyncTask.THREAD_POOL_EXECUTOR,
+                getResources().getInteger(R.integer.bg_autosave_time_ms)
+        );
+
+
+        // -----------------------------------------------------------------------------------------
+        // launch thread to periodically update the resource pane
+        bgResourceDisplayUpdateThread.onCountListener = new CounterTask.OnCountListener() {
+            @Override
+            public void onCount () {
+                resourcesPane.update();
+            }
+        };
+        bgResourceDisplayUpdateThread.executeOnExecutor(
+                AsyncTask.THREAD_POOL_EXECUTOR,
+                getResources().getInteger(R.integer.bg_resource_update_time_ms)
+        );
+
+    }
+
+    private void setupTabs () {
+        tabLayout = findViewById(R.id.tablayout_parent);
+
+        String[] tabNames = getResources().getStringArray(R.array.tab_names);
+        for (String tabName : tabNames) {
+            tabLayout.addTab(tabLayout.newTab().setText(tabName));
+        }
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
+
+    private void setupViewPager () {
+        // find and setup viewpager
+        viewPager = findViewById(R.id.viewPager);
+        tabFragmentPager = new TabFragmentPager (getSupportFragmentManager());
+        viewPager.setAdapter(tabFragmentPager);
+        tabLayout.addOnTabSelectedListener(this);
+
+        // View Pager will persistently store every page in the background
+        viewPager.setOffscreenPageLimit(tabLayout.getTabCount());
+
+        // set the first tab as active on startup
+        tabFragmentPager.setActive(getResources().getInteger(R.integer.default_active_tab));
+        viewPager.setCurrentItem(getResources().getInteger(R.integer.default_active_tab), true);
+    }
+
+    private void loadResourcePane () {
+        resourcesPane = new ResourcesPaneFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.resourcepane_placeholder, resourcesPane);
+        ft.commit();
     }
 }

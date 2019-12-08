@@ -4,6 +4,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,16 +29,24 @@ import java.util.Random;
 public class RecruitTabFragment extends Fragment implements TabFragment {
     private RecruitTabFragmentViewHolder viewHolder = null;
     private AppDataViewModel viewModel = null;
+    private Context context = null;
+    private Resources resources = null;
+
     private boolean mActive = false;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getContext();
+        resources = context.getResources();
+
         // inflate and populate view
         View view =  inflater.inflate(R.layout.tab_recruit_fragment, container, false);
         viewHolder = new RecruitTabFragmentViewHolder(view);
 
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
+
+
 
         return view;
     }
@@ -74,28 +85,21 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-
+            // Generate Action Header Fragment
             ft.replace(R.id.header_placeholder, constructActionHeaderFragment(), getRandomKey());
 
-            // Newspaper
-            actionRowFragments.add(constructActionRowFragment("0", "Newspaper Ad", "+1", 1, "footmen"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
+            // Generate Action Row Fragments
+            int recruitNumRows = resources.getInteger(R.integer.recruit_num_rows);
+            for (int rowIdx = 0; rowIdx < recruitNumRows; rowIdx++) {
+                int rowAndroidID = resources.getIdentifier(
+                        "recruit_row_" + rowIdx,
+                        "array", context.getPackageName()
+                );
 
-            // Town Crier
-            actionRowFragments.add(constructActionRowFragment("40", "Town Crier", "+10", 10, "minutemen"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Propaganda
-            actionRowFragments.add(constructActionRowFragment("250", "Spread Propaganda", "+100", 100, "artillery"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Celebrity
-            actionRowFragments.add(constructActionRowFragment("1500", "Celebrity Endorsement", "+1000", 1000, "calvery"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
-
-            // Dragon balls
-            actionRowFragments.add(constructActionRowFragment("80000", "Gather Dragon Balls", "+9001", 9001, "kakarot"));
-            ft.add(linearLayout.getId(), actionRowFragments.get(actionRowFragments.size() - 1), getRandomKey());
+                ActionRowFragment arf = constructActionRowFragment(resources.getStringArray(rowAndroidID));
+                actionRowFragments.add(arf);
+                ft.add(linearLayout.getId(), arf, getRandomKey());
+            }
 
             ft.commit();
         }
@@ -109,24 +113,29 @@ public class RecruitTabFragment extends Fragment implements TabFragment {
             }
         }
 
-        private ActionRowFragment constructActionRowFragment (String costLabel, String typeLabel, String valueLabel, Integer pincrement, String unit) {
+        private ActionRowFragment constructActionRowFragment (String[] rowInfo) {
+            String actionCost = rowInfo[resources.getInteger(R.integer.recruit_row_cost_idx)];
+            String actionTitle = rowInfo[resources.getInteger(R.integer.recruit_row_title_idx)];
+            String actionReward = "+" + rowInfo[resources.getInteger(R.integer.recruit_row_earned_power_value_idx)];
+            String actionUnit = rowInfo[resources.getInteger(R.integer.recruit_row_earned_unit_string_idx)];
+
+            // Bundle up the data
             Bundle bundle = new Bundle();
-            bundle.putString("costLabel", costLabel);
-            bundle.putString("typeLabel", typeLabel);
-            bundle.putString("valueLabel", valueLabel);
+            bundle.putString("costLabel", actionCost);
+            bundle.putString("typeLabel", actionTitle);
+            bundle.putString("valueLabel", actionReward);
 
             ActionRowFragment arf = new ActionRowFragment();
             arf.setArguments(bundle);
 
             // setup increment amount
-            arf.setIncrement(pincrement);
-            arf.setResource("power," + unit);
+            arf.setIncrement(Integer.parseInt(actionReward));
+            arf.setResource("power," + actionUnit);
 
             // setup callback for when the progress bar completes.
             arf.onProgressViewHolder = new OnProgressViewHolder() {
                 @Override
                 public void onComplete (String[] resources, int increment) {
-
                     for (String resource : resources) {
                         viewModel.incrementResource(resource, increment);
                     }
