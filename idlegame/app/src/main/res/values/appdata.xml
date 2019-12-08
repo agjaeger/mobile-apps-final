@@ -124,6 +124,9 @@
     </string-array>
 
 
+
+
+
     <integer name="upgrades_num_rows">2</integer>
     <integer name="upgrades_header_left_idx">0</integer>
     <integer name="upgrades_header_center_idx">1</integer>
@@ -142,6 +145,25 @@
         <item>100000</item>
         <item>Better Shovels</item>
     </string-array>
+
+
+    <string-array name="map_nations">
+        <item>fire</item>
+        <item>water</item>
+        <item>earth</item>
+    </string-array>
+
+    <string name="map_title_fire">Fire Nation</string>
+    <string name="map_title_water">Water Nation</string>
+    <string name="map_title_earth">Earth Nation</string>
+
+    <integer name="map_cost_fire">100</integer>
+    <integer name="map_cost_water">1000</integer>
+    <integer name="map_cost_earth">10000</integer>
+
+    <string name="map_reference_color_channel_fire">R</string>
+    <string name="map_reference_color_channel_water">B</string>
+    <string name="map_reference_color_channel_earth">G</string>
 
     <!-- ==================================================  -->
     <!--                RAW STRINGS                          -->

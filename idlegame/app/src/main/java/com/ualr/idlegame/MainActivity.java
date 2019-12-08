@@ -17,6 +17,7 @@ import com.ualr.idlegame.fragments.ResourcesPaneFragment;
 import com.ualr.idlegame.fragments.TabFragmentPager;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.fragments.tabs.ArmyTabFragment;
+import com.ualr.idlegame.fragments.tabs.MapTabFragment;
 import com.ualr.idlegame.fragments.tabs.RecruitTabFragment;
 import com.ualr.idlegame.fragments.tabs.UpgradesTabFragment;
 import com.ualr.idlegame.tasks.CounterTask;
@@ -159,6 +160,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 );
 
                 ((ArmyTabFragment) tabFragmentPager.getItem(1)).tryUnlockAll(
+                        viewModel.getResourceValue(getResources().getString(R.string.power_resource))
+                );
+
+                ((MapTabFragment) tabFragmentPager.getItem(3)).tryUnlockAll(
                         viewModel.getResourceValue(getResources().getString(R.string.power_resource))
                 );
 

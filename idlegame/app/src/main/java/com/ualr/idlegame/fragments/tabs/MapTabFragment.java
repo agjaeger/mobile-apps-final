@@ -1,5 +1,7 @@
 package com.ualr.idlegame.fragments.tabs;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
@@ -22,23 +25,32 @@ import com.ualr.idlegame.R;
 import com.ualr.idlegame.fragments.interfaces.TabFragment;
 import com.ualr.idlegame.viewmodel.AppDataViewModel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MapTabFragment extends Fragment implements TabFragment {
+    private Context context = null;
+    private Resources resources = null;
 
     private MapTabFragmentViewHolder viewHolder = null;
     private AppDataViewModel viewModel;
+
     private boolean mActive = false;
+
+    private Map<String, Boolean> unlockedNations = new HashMap<>();
+    private Map<String, Boolean> unlockableNations = new HashMap<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getContext();
+        resources = context.getResources();
+
         View view =  inflater.inflate(R.layout.tab_map_fragment, container, false);
-
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
-
         viewHolder = new MapTabFragmentViewHolder(view);
 
-
         return view;
-        //return inflater.inflate(R.layout.tab_map_fragment, container, false);
     }
 
     @Override
@@ -61,15 +73,51 @@ public class MapTabFragment extends Fragment implements TabFragment {
         mActive = false;
     }
 
-    public class MapTabFragmentViewHolder {
+    public void tryUnlockAll (int powerEarned) {
+        for (Map.Entry<String, NationCardViewHolder> nation : viewHolder.nations.entrySet()) {
+            unlockableNations.put(nation.getKey(), powerEarned > nation.getValue().cost);
+        }
+    }
+
+    private class NationCardViewHolder {
+        public TextView titleTextView;
+        public TextView powerValueTextView;
+
+        public int cost;
+
+        public NationCardViewHolder (String nationName, View view) {
+            int nationTitleId = resources.getIdentifier("nation_"+nationName+"_title", "id", context.getPackageName());
+            int nationPowerValueId = resources.getIdentifier("nation_"+nationName+"_power_value", "id", context.getPackageName());
+
+            cost =
+                resources.getInteger(resources.getIdentifier(
+                    "map_cost_"+nationName,
+                    "integer",
+                    context.getPackageName())
+                );
+
+            titleTextView = view.findViewById(nationTitleId);
+            powerValueTextView = view.findViewById(nationPowerValueId);
+
+            titleTextView.setText(
+                    resources.getString(resources.getIdentifier(
+                            "map_title_"+nationName,
+                            "string",
+                            context.getPackageName())
+                    )
+            );
+
+            powerValueTextView.setText("" + cost);
+        }
+    }
+
+    private class MapTabFragmentViewHolder {
         private ImageView imageView;
         private ImageView referenceImageView;
 
         private Bitmap reference;
 
-        private boolean unlockedNorth = false;
-        private boolean unlockedEast = false;
-        private boolean unlockedWest = false;
+        public Map<String, NationCardViewHolder> nations = new HashMap<>();
 
         public MapTabFragmentViewHolder(View view){
             imageView = view.findViewById(R.id.map);
@@ -78,21 +126,33 @@ public class MapTabFragment extends Fragment implements TabFragment {
 
             reference = ((BitmapDrawable) referenceImageView.getDrawable()).getBitmap();
 
+
+            String[] nationNames = resources.getStringArray(R.array.map_nations);
+            for (String nation : nationNames) {
+                NationCardViewHolder nc = new NationCardViewHolder(nation, view);
+                nations.put(nation, nc);
+
+                unlockableNations.put(nation, false);
+                unlockedNations.put(nation, false);
+            }
+
             imageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
+                    // get screen coordinates
                     int x = (int) event.getX();
                     int y = (int) event.getY();
                     float[] eventXY = new float[] {x, y};
 
-                    Matrix invertMatrix =
+                    // convert to image coordinates
+                    Matrix imageMatrix =
                     ((ImageView)imageView).getImageMatrix();
 
-                    invertMatrix.mapPoints(eventXY);
+                    imageMatrix.mapPoints(eventXY);
                     x = Integer.valueOf((int)eventXY[0]);
                     y = Integer.valueOf((int)eventXY[1]);
 
-
+                    // clamp just in case
                     if (x < 0) {
                         x = 0;
                     } else if (x > reference.getWidth()) {
@@ -105,28 +165,32 @@ public class MapTabFragment extends Fragment implements TabFragment {
                         y = reference.getHeight() - 1;
                     }
 
+                    // get pixel and color
                     int pixel = reference.getPixel(x, y);
 
                     int colorR = Color.red(pixel);
                     int colorG = Color.green(pixel);
                     int colorB = Color.blue(pixel);
 
-                    System.out.println("REF COLOR " + colorR + " " + colorG + " " + colorB);
-
-                    if (colorR > 200 && !unlockedNorth && !unlockedWest && !unlockedEast) {
-                        setImage(R.drawable.map2);
-                        unlockedNorth = true;
+                    // determine if we should unlock
+                    if (colorR > 200) {
+                        System.out.println("Clicked FIre Namtion");
+                        if (unlockableNations.get("fire") && !unlockedNations.get("fire") && !unlockedNations.get("water") && !unlockedNations.get("earth")) {
+                            setImage(R.drawable.map2);
+                            unlockedNations.put("fire", true);
+                        }
                     }
 
-                    if (colorB > 200 && unlockedNorth && !unlockedWest && !unlockedEast) {
+                    if (colorB > 200 && unlockableNations.get("water") && unlockedNations.get("fire") && !unlockedNations.get("water") && !unlockedNations.get("earth")) {
                         setImage(R.drawable.map3);
-                        unlockedWest = true;
+                        unlockedNations.put("water", true);
                     }
 
-                    if (colorG > 200 && unlockedNorth && unlockedWest && !unlockedEast) {
+                    if (colorG > 200 && unlockableNations.get("earth") && unlockedNations.get("fire") && unlockedNations.get("water") && !unlockedNations.get("earth")) {
                         setImage(R.drawable.map4);
-                        unlockedEast = true;
+                        unlockedNations.put("earth", true);
                     }
+
                     return false;
                 }
             });

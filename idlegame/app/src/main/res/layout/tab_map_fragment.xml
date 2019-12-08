@@ -43,7 +43,7 @@
         app:srcCompat="@drawable/reference" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/firenation_card"
+        android:id="@+id/nation_fire_card"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
@@ -61,46 +61,44 @@
             android:background="#00FFFFFF">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/nation_fire_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:text="Fire Nation"
-                android:textColor="#FFFFFF"
+                android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:background="#00FFFFFF"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-            <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/nation_fire_power_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:background="#00FFFFFF"
-                android:text="Power Req"
-                android:textColor="#FFFFFF"
+                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nation_fire_power_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/waternation_card"
+        android:id="@+id/nation_water_card"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -118,46 +116,41 @@
             android:background="#00FFFFFF">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/nation_water_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:text="Fire Nation"
-                android:textColor="#FFFFFF"
+                android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:background="#00FFFFFF"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-            <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/nation_water_power_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:background="#00FFFFFF"
-                android:text="Power Req"
-                android:textColor="#FFFFFF"
+                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nation_water_power_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/earthnation_card"
+        android:id="@+id/nation_earth_card"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
@@ -171,33 +164,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#00FFFFFF">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/nation_earth_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:text="Fire Nation"
+                android:text="TextView"
                 android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:background="#00FFFFFF"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-            <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/nation_earth_power_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -208,7 +190,19 @@
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nation_earth_power_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:background="#00FFFFFF"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
