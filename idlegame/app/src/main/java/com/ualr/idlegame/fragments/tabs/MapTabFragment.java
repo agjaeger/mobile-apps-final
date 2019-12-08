@@ -66,15 +66,15 @@ public class MapTabFragment extends Fragment implements TabFragment {
                 @Override
                 public void onClick(View v){
 
-                    if(viewModel.getResourceValue("Power") >= 1000) {
+                    if(viewModel.getResourceValue("power") >= 100000) {
                         setImage(R.drawable.map4);
                     }
-                    else if (viewModel.getResourceValue("Power") >= 1000) {
+                    else if (viewModel.getResourceValue("power") >= 10000) {
                         setImage(R.drawable.map3);
                     }
-                    else if (viewModel.getResourceValue("Power") >= 1000) {
+                    else if (viewModel.getResourceValue("power") >= 1000) {
                         setImage(R.drawable.map2);
-                    }
+                   }
             }
 
             });
