@@ -24,4 +24,8 @@ public class UpgradeTask extends AsyncTask<Integer, View, Void> {
         return null;
     }
 
+    protected void onProgressUpdate(View... progress) {
+        onUpgradeListener.onUpgrade();
+    }
+
 }

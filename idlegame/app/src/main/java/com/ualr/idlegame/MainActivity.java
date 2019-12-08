@@ -1,6 +1,7 @@
 package com.ualr.idlegame;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,10 +55,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             }
         };
 
+        speedUpgradeThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 500);
+
         speedUpgradeThread.onUpgradeListener = new UpgradeTask.OnUpgradeListener() {
             @Override
             public void onUpgrade() {
-                
+                Fragment fragment = tabFragmentPager.getItem(2);
+
+
             }
         };
 

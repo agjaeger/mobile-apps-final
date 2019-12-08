@@ -25,13 +25,16 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
     private UpgradesTabFragment.UpgradesTabFragmentViewHolder viewHolder = null;
     private AppDataViewModel viewModel = null;
     private boolean mActive = false;
+    private List<String> upgrades = new ArrayList<>();
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
         viewHolder = new UpgradesTabFragment.UpgradesTabFragmentViewHolder(view);
+
         // get App Data View Model
         viewModel = ViewModelProviders.of(getActivity()).get(AppDataViewModel.class);
+
         return view;
         //return inflater.inflate(R.layout.tab_upgrades_fragment, container, false);
     }
@@ -56,6 +59,10 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
         mActive = false;
     }
 
+    public void addUpgrades (String upgrade) { upgrades.add(upgrade); }
+
+    public List<String> getUpgrades () {return upgrades;}
+
 
     public class UpgradesTabFragmentViewHolder {
         private LinearLayout linearLayout;
@@ -70,10 +77,17 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
 
             ft.replace(R.id.upgrade_header_placeholder, new ActionHeaderFragment(), getRandomKey());
 
-            upgradeRowFragments.add(constructUpgradeRowFragment("10", "bonus 1", "x2"));
+            upgradeRowFragments.add(constructUpgradeRowFragment("100 Coins", "Double-Time", "x2"));
             ft.add(linearLayout.getId(), upgradeRowFragments.get(upgradeRowFragments.size() - 1), "Upgrade 1");
 
-            upgradeRowFragments.add(constructUpgradeRowFragment("10", "bonus 2", "x2"));
+            upgradeRowFragments.get(upgradeRowFragments.size() - 1).setOnUpgradeListener(new UpgradeRowFragment.OnUpgradeListener() {
+                @Override
+                public void onUpgrade(String upgrade) {
+                    addUpgrades(upgrade);
+                }
+            });
+
+            upgradeRowFragments.add(constructUpgradeRowFragment("100000 Coins", "bonus 2", "x2"));
             ft.add(linearLayout.getId(), upgradeRowFragments.get(upgradeRowFragments.size() - 1), "Upgrade 2");
 
             ft.commit();
