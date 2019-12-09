@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="placeholder">PLACEHOLDER</string>
+    <string name="placeholder_int">0</string>
+
+    <string name="purchaselabel">Purchase</string>
+    <string name="purchasedlabel">Purchased!</string>
+    <string name="congrats">Congrats!</string>
+
+    <string name="mapDesc">World Map</string>
+    <string name="refMapDesc">Reference World Map</string>
+
+    <string name="resource_heading">Resources</string>
+    <string name="army_heading">Army</string>
+
+    <string name="power_heading">Power</string>
+    <string name="money_heading">Money</string>
+
+    <string name="power_required">Power Req</string>
+    <string name="power_gained">Power Gained</string>
+
+    <string name="money_required">Money Req</string>
+    <string name="money_gained">Money Gained</string>
+
+    <string name="actionTitle">Action</string>
+
+    <string name="footmen_heading">Footmen</string>
+    <string name="minutemen_heading">Minutemen</string>
+    <string name="artillery_heading">Artillery</string>
+    <string name="cavalry_heading">Cavalry</string>
+    <string name="kakarot_heading">Kakarot</string>
+
+    <string name="power_resource">power</string>
+    <string name="money_resource">money</string>
+
+    <string name="footmen">footmen</string>
+    <string name="minutemen">minutemen</string>
+    <string name="artillery">artillery</string>
+    <string name="cavalry">cavalry</string>
+    <string name="kakarot">kakarot</string>
+
+    <string name="map_title_fire">Fire Nation</string>
+    <string name="map_title_water">Water Nation</string>
+    <string name="map_title_earth">Earth Nation</string>
+
+
+    <string name="upgradeTitle">Upgrade</string>
+    <string name="upgrade_powerup">Power Up</string>
+    <string name="upgrade_doubleTime">Double Time</string>
+
+    <!-- App Specific Actions -->
+    <string name="action_dig_ditches">Dig Ditches</string>
+    <string name="action_fortify_town">Fortify Town</string>
+    <string name="action_socks">Blow Their Socks Off</string>
+    <string name="action_horse">Illegal Horse Racing</string>
+    <string name="action_vegeta">Fight Vegeta</string>
+
+    <string name="action_newspaper">Newspaper Ad</string>
+    <string name="action_crier">Town Crier</string>
+    <string name="action_propaganda">Spread Propaganda</string>
+    <string name="action_endorsement">Celebrity Endorsement</string>
+    <string name="action_dragonballs">Gather Dragon Balls</string>
+</resources>

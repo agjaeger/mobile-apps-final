@@ -6,18 +6,17 @@
     <integer name="upgrades_header_center_idx">1</integer>
 
     <string-array name="upgrades_header">
-        <item>Money Req</item>
-        <item>Upgrade</item>
+        <item>@string/money_required</item>
+        <item>@string/upgradeTitle</item>
     </string-array>
 
     <string-array name="upgrades_row_0">
         <item>10</item>
-        <item>Power Up</item>
+        <item>@string/upgrade_powerup</item>
     </string-array>
 
     <string-array name="upgrades_row_1">
         <item>100</item>
-        <item>Double-Time</item>
+        <item>@string/upgrade_doubleTime</item>
     </string-array>
-
 </resources>

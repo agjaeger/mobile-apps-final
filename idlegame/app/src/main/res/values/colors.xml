@@ -4,6 +4,7 @@
     <color name="colorSecondary">#9e9a75</color>
     <color name="colorPrimaryDark">	#1c222e</color>
     <color name="colorAccent">#9e9a75</color>
+
     <color name="textColorPrimary">#604439</color>
     <color name="transparent">@android:color/transparent</color>
 </resources>
