@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="noAdjust">0dp</dimen>
+    <dimen name="baseTabElevation">2dp</dimen>
+
+    <dimen name="actionTabHeight">60dp</dimen>
+    <dimen name="resourceWidth">216dp</dimen>
+    <dimen name="viewPagerMargin">8dp</dimen>
+
+    <dimen name="congratsPadding">16dp</dimen>
+    <dimen name="gameOverCornerRadius">8dp</dimen>
+    <dimen name="gameOverElevation">8dp</dimen>
+
+    <dimen name="armyLabelMarginStart">10dp</dimen>
+    <dimen name="armyLabelMarginEnd">8dp</dimen>
+    <dimen name="armyItemMarginStart">16dp</dimen>
+    <dimen name="armyValueMarginEnd">16dp</dimen>
+
+
+
+</resources>
