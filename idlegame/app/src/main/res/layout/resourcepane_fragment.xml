@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="216dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/resourceWidth"
+        android:layout_height="@dimen/noAdjust"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,15 +23,16 @@
                 android:id="@+id/army_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="8dp"
+
+                android:layout_marginStart="@dimen/armyLabelMarginStart"
+                android:layout_marginBottom="@dimen/armyLabelMarginEnd"
                 android:text="@string/army_heading"
                 app:layout_constraintBottom_toTopOf="@+id/divider2"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/divider2"
-                android:layout_width="214dp"
+                android:layout_width="@dimen/resourceWidth"
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -45,7 +46,7 @@
                 android:id="@+id/footmen_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/armyItemMarginStart"
                 android:layout_marginTop="10dp"
                 android:text="@string/footmen_heading"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
@@ -55,7 +56,7 @@
                 android:id="@+id/minutemen_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/armyItemMarginStart"
                 android:layout_marginTop="10dp"
                 android:text="@string/minutemen_heading"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
@@ -65,7 +66,7 @@
                 android:id="@+id/artillery_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/armyItemMarginStart"
                 android:layout_marginTop="10dp"
                 android:text="@string/artillery_heading"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
@@ -75,7 +76,7 @@
                 android:id="@+id/cavalry_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/armyItemMarginStart"
                 android:layout_marginTop="10dp"
                 android:text="@string/cavalry_heading"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
@@ -85,7 +86,7 @@
                 android:id="@+id/kakarot_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/armyItemMarginStart"
                 android:layout_marginTop="10dp"
                 android:text="@string/kakarot_heading"
                 app:layout_constraintStart_toStartOf="@+id/divider2"
@@ -96,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/armyValueMarginEnd"
                 android:text="@string/placeholder_int"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/armyValueMarginEnd"
                 android:text="@string/placeholder_int"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/footmen_value" />
@@ -116,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/armyValueMarginEnd"
                 android:text="@string/placeholder_int"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/minutemen_value" />
@@ -126,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/armyValueMarginEnd"
                 android:text="@string/placeholder_int"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artillery_value" />
@@ -136,7 +137,7 @@
                 android:layout_width="9dp"
                 android:layout_height="21dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/armyValueMarginEnd"
                 android:text="@string/placeholder_int"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cavalry_value" />

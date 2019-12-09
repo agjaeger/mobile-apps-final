@@ -10,10 +10,10 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_parent"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/noAdjust"
+        android:layout_height="@dimen/actionTabHeight"
         android:background="#1E3763"
-        android:elevation="2dp"
+        android:elevation="@dimen/baseTabElevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,10 +21,10 @@
 
     <FrameLayout
         android:id="@+id/resourcepane_placeholder"
-        android:layout_width="216dp"
+        android:layout_width="@dimen/resourceWidth"
         android:layout_height="match_parent"
         android:background="#8862724C"
-        android:elevation="2dp"
+        android:elevation="@dimen/baseTabElevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,9 +33,9 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/noAdjust"
+        android:layout_height="@dimen/noAdjust"
+        android:layout_marginTop="@dimen/viewPagerMargin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
