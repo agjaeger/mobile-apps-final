@@ -77,12 +77,13 @@ public class UpgradesTabFragment extends Fragment implements TabFragment {
 
 
     public void tryUnlockAll (Integer totalMoneyEarned) {
-        for (PurchaseableActionRowFragment arf  : viewHolder.upgradeRowFragments) {
-            if (totalMoneyEarned >= arf.getCost()) {
-                System.out.println(arf);
-                arf.enablePurchaseButton();
-            }
 
+        if (viewHolder != null) {
+            for (PurchaseableActionRowFragment arf : viewHolder.upgradeRowFragments) {
+                if (totalMoneyEarned >= arf.getCost()) {
+                    arf.enablePurchaseButton();
+                }
+            }
         }
     }
 
