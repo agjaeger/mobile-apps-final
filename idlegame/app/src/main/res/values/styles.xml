@@ -16,7 +16,6 @@
     <style name="Button.Theme" parent="TextAppearance.AppCompat.Button">
         <item name="android:colorPrimary">@color/colorPrimaryDark</item>
         <item name="android:textColor">@color/colorAccent</item>
-
     </style>
 
 </resources>

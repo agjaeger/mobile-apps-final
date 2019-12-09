@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="recruit_header_left_idx">0</integer>
+    <integer name="recruit_header_center_idx">1</integer>
+    <integer name="recruit_header_right_idx">2</integer>
+
+    <string-array name="recruit_header">
+        <item>Money Req</item>
+        <item>Action</item>
+        <item>Power Gained</item>
+    </string-array>
+
+
+    <integer name="recruit_num_rows">5</integer>
+
+    <integer name="recruit_row_cost_idx">0</integer>
+    <integer name="recruit_row_title_idx">1</integer>
+    <integer name="recruit_row_earned_unit_string_idx">2</integer>
+    <integer name="recruit_row_earned_power_value_idx">3</integer>
+
+    <string-array name="recruit_row_0">
+        <item>0</item>
+        <item>Newspaper Ad</item>
+        <item>@string/footmen</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="recruit_row_1">
+        <item>40</item>
+        <item>Town Crier</item>
+        <item>@string/minutemen</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="recruit_row_2">
+        <item>250</item>
+        <item>Spread Propaganda</item>
+        <item>@string/artillery</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="recruit_row_3">
+        <item>1500</item>
+        <item>Celebrity Endorsement</item>
+        <item>@string/cavalry</item>
+        <item>1000</item>
+    </string-array>
+
+    <string-array name="recruit_row_4">
+        <item>80000</item>
+        <item>Gather Dragon Balls</item>
+        <item>@string/kakarot</item>
+        <item>9001</item>
+    </string-array>
+</resources>
