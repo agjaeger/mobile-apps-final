@@ -119,6 +119,16 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                                     ((TabFragment)f).onTick();
                                }
                         }
+
+                            if (upgrades.get(x).equals("Power UP")){
+                                if ( viewModel.getResourceValue(getResources().getString(R.string.money_resource)) <= 1000){
+                                    viewModel.setResourceValue(getResources().getString(R.string.money_resource), 1001);
+                                }
+                                if ( viewModel.getResourceValue(getResources().getString(R.string.power_resource)) <= 1000){
+                                    viewModel.setResourceValue(getResources().getString(R.string.power_resource), 1001);
+                                }
+
+                            }
                     }
                 }
             }
