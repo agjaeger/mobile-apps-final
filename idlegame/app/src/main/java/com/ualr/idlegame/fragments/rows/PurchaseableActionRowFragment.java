@@ -39,6 +39,7 @@ public class PurchaseableActionRowFragment extends ActionRowFragment {
     }
 
     public void enablePurchaseButton () {
+        if (viewHolder != null)
         viewHolder.enablePurchaseBtn();
     }
 
