@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#EBEBEB"
+        android:backgroundTint="@color/colorPrimary"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="test"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
                 android:id="@+id/centerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="test"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rightTextView"
                 app:layout_constraintStart_toEndOf="@+id/leftTextView"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="test"
+                android:text="@string/placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +75,7 @@
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
             android:indeterminate="false"
             android:progress="60"
             android:progressDrawable="@drawable/curved_progress_bar"
@@ -87,7 +88,7 @@
             android:layout_margin="0dp"
             android:clickable="false"
             android:padding="0dp"
-            android:text="Purchase"
+            android:text="@string/purchaselabel"
             android:visibility="invisible" />
 
         <TextView
@@ -96,7 +97,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Purchased!"
+            android:text="@string/purchasedlabel"
             android:visibility="invisible" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

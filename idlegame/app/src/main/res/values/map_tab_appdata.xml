@@ -6,15 +6,7 @@
         <item>earth</item>
     </string-array>
 
-    <string name="map_title_fire">Fire Nation</string>
-    <string name="map_title_water">Water Nation</string>
-    <string name="map_title_earth">Earth Nation</string>
-
     <integer name="map_cost_fire">100</integer>
     <integer name="map_cost_water">1000</integer>
     <integer name="map_cost_earth">5000</integer>
-
-    <string name="map_reference_color_channel_fire">R</string>
-    <string name="map_reference_color_channel_water">B</string>
-    <string name="map_reference_color_channel_earth">G</string>
 </resources>

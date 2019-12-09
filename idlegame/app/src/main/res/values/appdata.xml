@@ -22,18 +22,7 @@
         <item>@string/kakarot</item>
     </string-array>
 
-=
 
-    <string name="power_resource">power</string>
-    <string name="money_resource">money</string>
-
-    <string name="footmen" id="footmen_str">footmen</string>
-    <string name="minutemen" id="minutemen_str">minutemen</string>
-    <string name="artillery" id="artillery_str">artillery</string>
-    <string name="cavalry" id="cavalry_str">cavalry</string>
-    <string name="kakarot" id="kakarot_str">kakarot</string>
-
-=
     <integer name="default_active_tab">0</integer>
     <integer name="bg_tick_time_ms">10</integer>
     <integer name="bg_autosave_time_ms">25000</integer>
