@@ -8,20 +8,13 @@
     android:id="@+id/activityRoot"
     >
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="10dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_parent"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:background="#1E3763"
         android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="center" />
@@ -30,6 +23,7 @@
         android:id="@+id/resourcepane_placeholder"
         android:layout_width="216dp"
         android:layout_height="match_parent"
+        android:background="#8862724C"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +35,9 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/resourcepane_placeholder"
         app:layout_constraintTop_toBottomOf="@+id/tablayout_parent" />
 
