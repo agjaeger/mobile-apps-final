@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/upgrade_header_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="@dimen/actionTabHeaderHeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,9 +19,8 @@
 
     <LinearLayout
         android:id="@+id/upgrade_linear_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/noAdjust"
+        android:layout_height="@dimen/noAdjust"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
